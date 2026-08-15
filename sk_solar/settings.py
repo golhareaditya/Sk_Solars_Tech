@@ -5,6 +5,8 @@ Django settings for sk_solar project.
 import os
 from pathlib import Path
 
+
+
 import dj_database_url
 from django.contrib.gis import db
 from django.template.backends import django
