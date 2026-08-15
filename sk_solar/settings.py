@@ -31,15 +31,23 @@ SECRET_KEY = os.environ.get(
     "DJANGO_SECRET_KEY",
     "django-insecure-_t0ovgfnysyb^p1#xsha#-mg6r49q*^c-bu!7mwj-w@a7er(-x",
 )
-DEBUG = os.environ.get("DEBUG", "True").lower() == "true"
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
 default_allowed_hosts = "127.0.0.1,localhost,0.0.0.0,testserver"
-allowed_hosts = os.environ.get("ALLOWED_HOSTS", default_allowed_hosts)
-ALLOWED_HOSTS = [host.strip() for host in allowed_hosts.split(",") if host.strip()]
-ALLOWED_HOSTS.extend([".onrender.com"])
 
-if DEBUG and "*" not in ALLOWED_HOSTS:
-    ALLOWED_HOSTS.append("*")
+allowed_hosts = os.environ.get(
+    "ALLOWED_HOSTS",
+    default_allowed_hosts
+)
+
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in allowed_hosts.split(",")
+    if host.strip()
+]
+
+if ".onrender.com" not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(".onrender.com")
 
 
 INSTALLED_APPS = [
@@ -84,29 +92,25 @@ TEMPLATES = [
 WSGI_APPLICATION = "sk_solar.wsgi.application"
 
 
+
 DATABASE_URL = os.environ.get("DATABASE_URL")
-DATABASE_CONN_MAX_AGE = int(os.environ.get("DATABASE_CONN_MAX_AGE", "600"))
-DATABASE_SSL_REQUIRE = os.environ.get("DATABASE_SSL_REQUIRE", str(not DEBUG)).lower() == "true"
-database_default_url = DATABASE_URL or f"sqlite:///{default_sqlite_path}"
-database_is_sqlite = database_default_url.startswith("sqlite")
 
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD':'Aditya@123',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    },
-
-    'sqlite': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db_recovery.sqlite3',
+if DATABASE_URL:
+    DATABASES = {
+        "default": dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=600,
+            ssl_require=not DEBUG,
+        )
     }
-}
-    
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": default_sqlite_path,
+        }
+    }
+
 
 
 
