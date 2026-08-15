@@ -32,6 +32,9 @@ SECRET_KEY = os.environ.get(
     "django-insecure-_t0ovgfnysyb^p1#xsha#-mg6r49q*^c-bu!7mwj-w@a7er(-x",
 )
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+if ".onrender.com" not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(".onrender.com")
+
 
 default_allowed_hosts = "127.0.0.1,localhost,0.0.0.0,testserver"
 
