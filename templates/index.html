@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SK Solar Technology</title>
+  <link rel="icon" href="{% static 'images/sk-solar-logo.png' %}" type="image/png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Urbanist:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <style>
+    :root {
+      --page-bg: #eef6ff;
+      --surface: rgba(255, 255, 255, 0.94);
+      --primary: #0a8f6a;
+      --primary-dark: #12344d;
+      --accent: #ffb703;
+      --accent-soft: #ffe29a;
+      --secondary: #ff6b6b;
+      --secondary-soft: #ffd7d7;
+      --sky: #59c3ff;
+      --sky-soft: #d7f1ff;
+      --text: #162536;
+      --muted: #5d6c7c;
+      --border: rgba(22, 37, 54, 0.08);
+      --shadow: 0 24px 60px rgba(35, 84, 122, 0.16);
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(255, 183, 3, 0.22), transparent 24%),
+        radial-gradient(circle at top right, rgba(89, 195, 255, 0.2), transparent 28%),
+        radial-gradient(circle at 20% 80%, rgba(10, 143, 106, 0.16), transparent 22%),
+        linear-gradient(180deg, #f8fdff 0%, #eef7ef 28%, var(--page-bg) 62%, #ffffff 100%);
+      color: var(--text);
+      font-family: 'Manrope', sans-serif;
+    }
+
+    h1, h2, h3, h4, h5, h6,
+    .btn,
+    .section-eyebrow,
+    .brand-chip,
+    .impact-value {
+      font-family: 'Urbanist', sans-serif;
+    }
+
+    .navbar {
+    background-color: white !important;
+      backdrop-filter: blur(14px);
+    }
+
+    .hero-pro {
+      position: relative;
+      padding: 8rem 0 5rem;
+      overflow: hidden;
+    }
+
+    .hero-pro::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(18, 52, 77, 0.95), rgba(10, 143, 106, 0.72), rgba(255, 107, 107, 0.3)),
+        url("{% static 'images/img.jpg' %}") center/cover no-repeat;
+      z-index: -2;
+    }
+
+    .hero-pro::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 140px;
+      background: linear-gradient(180deg, rgba(245, 247, 251, 0), rgba(245, 247, 251, 1));
+      z-index: -1;
+    }
+
+    .hero-shell {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 32px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+    }
+
+    .hero-copy {
+      padding: 3rem;
+      color: #fff;
+    }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(255, 183, 3, 0.24), rgba(255, 107, 107, 0.18));
+      color: #fff1bc;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      margin: 1.4rem 0 1rem;
+      font-size: clamp(2.5rem, 5vw, 4.8rem);
+      line-height: 1.02;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-title .accent {
+      color: #ffe7a3;
+      text-shadow: 0 8px 24px rgba(255, 183, 3, 0.18);
+    }
+
+    .hero-copy p {
+      max-width: 42rem;
+      color: rgba(255, 255, 255, 0.84);
+      font-size: 1.05rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn-hero-primary,
+    .btn-hero-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.95rem 1.4rem;
+      border-radius: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .btn-hero-primary {
+      background: linear-gradient(135deg, #ffd05a, #ff8f3c);
+      color: #1f2206;
+      box-shadow: 0 18px 35px rgba(255, 143, 60, 0.3);
+    }
+
+    .btn-hero-secondary {
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      background: linear-gradient(135deg, rgba(89, 195, 255, 0.18), rgba(255, 255, 255, 0.08));
+    }
+
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .hero-point {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.05));
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 18px;
+      padding: 1rem;
+    }
+
+    .hero-point strong {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .hero-point span {
+      color: rgba(255, 255, 255, 0.74);
+      font-size: 0.92rem;
+    }
+
+    .hero-panel {
+      height: 100%;
+      padding: 3rem 2.5rem;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(233, 249, 255, 0.92));
+      color: var(--text);
+    }
+
+    .hero-panel-card,
+    .glass-card,
+    .service-panel,
+    .project-panel,
+    .brand-chip,
+    .quote-panel {
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-panel-card {
+      background: linear-gradient(180deg, #ffffff, #fff6ea);
+      padding: 1.5rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-panel-card h4 {
+      margin-bottom: 0.45rem;
+      font-size: 1.15rem;
+      font-weight: 800;
+    }
+
+    .hero-panel-card p,
+    .mini-list li,
+    .section-subtitle,
+    .stat-card p,
+    .brand-chip span,
+    .service-panel p,
+    .project-panel p,
+    .quote-panel p,
+    .footer-note {
+      color: var(--muted);
+    }
+
+    .mini-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .mini-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      font-size: 0.96rem;
+    }
+
+    .mini-list i,
+    .service-icon,
+    .impact-icon {
+      color: var(--primary);
+    }
+
+    .section-block {
+      padding: 2rem 0 5rem;
+      position: relative;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      margin: 0.7rem 0 0.5rem;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05;
+      font-weight: 800;
+      color: var(--primary-dark);
+      max-width: 14ch;
+    }
+
+    .section-subtitle {
+      margin: 0;
+      max-width: 42rem;
+      font-size: 1rem;
+    }
+
+    .glass-card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(242, 249, 255, 0.9));
+      padding: 1.5rem;
+      backdrop-filter: blur(10px);
+      height: 100%;
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: -2.4rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .impact-icon {
+      width: 54px;
+      height: 54px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(89, 195, 255, 0.18), rgba(10, 143, 106, 0.12));
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .impact-value {
+      display: block;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.2rem;
+    }
+
+    .brand-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .section-block.section-spotlight {
+      padding-top: 4.5rem;
+      padding-bottom: 4.5rem;
+    }
+
+    .section-block.section-spotlight::before {
+      content: "";
+      position: absolute;
+      inset: 1rem 0;
+      border-radius: 36px;
+      z-index: -1;
+    }
+
+    .section-block.section-spotlight .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-block.partners-showcase::before {
+      background:
+        radial-gradient(circle at top left, rgba(255, 183, 3, 0.2), transparent 26%),
+        radial-gradient(circle at bottom right, rgba(89, 195, 255, 0.18), transparent 30%),
+        linear-gradient(135deg, rgba(255, 248, 223, 0.9), rgba(236, 249, 255, 0.92));
+      box-shadow: inset 0 0 0 1px rgba(18, 52, 77, 0.05);
+    }
+
+    .brand-chip {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(238, 248, 255, 0.92));
+      padding: 1.5rem 1.2rem;
+      text-align: left;
+      height: 100%;
+    }
+
+    .brand-chip::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -35% auto;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+      z-index: -1;
+    }
+
+    .brand-chip-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .brand-mark {
+      width: 52px;
+      height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--primary-dark);
+      font-size: 1.25rem;
+      box-shadow: inset 0 0 0 1px rgba(18, 52, 77, 0.06);
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(18, 52, 77, 0.08);
+      color: var(--primary-dark);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .brand-chip strong {
+      display: block;
+      color: var(--primary-dark);
+      font-size: 1.08rem;
+      font-weight: 800;
+      margin-bottom: 0.3rem;
+    }
+
+    .brand-chip p {
+      margin-bottom: 1rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .brand-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--primary-dark);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .stat-card:nth-child(1),
+    .brand-chip:nth-child(1) {
+      background: linear-gradient(180deg, #ffffff, #fff8df);
+    }
+
+    .stat-card:nth-child(2),
+    .brand-chip:nth-child(2) {
+      background: linear-gradient(180deg, #ffffff, #e8fff6);
+    }
+
+    .stat-card:nth-child(3),
+    .brand-chip:nth-child(3) {
+      background: linear-gradient(180deg, #ffffff, #ebf7ff);
+    }
+
+    .stat-card:nth-child(4),
+    .brand-chip:nth-child(4),
+    .brand-chip:nth-child(5) {
+      background: linear-gradient(180deg, #ffffff, #fff0f0);
+    }
+
+    .service-panel,
+    .project-panel {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(245, 250, 255, 0.96));
+      padding: 1.5rem;
+      height: 100%;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .service-panel:hover,
+    .project-panel:hover,
+    .glass-card:hover,
+    .brand-chip:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 65px rgba(35, 84, 122, 0.22);
+    }
+
+    .service-icon {
+      width: 60px;
+      height: 60px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--accent-soft), var(--sky-soft));
+      font-size: 1.45rem;
+      margin-bottom: 1rem;
+    }
+
+    .service-panel h4,
+    .project-panel h5 {
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    .service-panel::before,
+    .project-panel::before,
+    .quote-panel::before {
+      content: "";
+      display: block;
+      width: 64px;
+      height: 4px;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, var(--accent), var(--sky), var(--secondary));
+    }
+
+    .service-link {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .product-showcase {
+      position: relative;
+      padding: 5rem 0;
+      overflow: hidden;
+    }
+
+    .product-showcase::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(140deg, rgba(18, 52, 77, 0.95), rgba(10, 143, 106, 0.92)),
+        radial-gradient(circle at top right, rgba(255, 183, 3, 0.22), transparent 26%);
+      z-index: -2;
+    }
+
+    .product-showcase::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(9, 32, 47, 0.18) 100%),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 140px);
+      z-index: -1;
+      opacity: 0.85;
+    }
+
+    .product-showcase .section-title,
+    .product-showcase .section-subtitle {
+      color: #fff;
+    }
+
+    .product-showcase .section-subtitle {
+      max-width: 38rem;
+      color: rgba(255, 255, 255, 0.76);
+    }
+
+    .product-showcase .service-panel {
+      border-color: rgba(255, 255, 255, 0.08);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(239, 248, 244, 0.94));
+      box-shadow: 0 24px 60px rgba(3, 15, 24, 0.26);
+    }
+
+    .product-showcase .project-meta {
+      background: linear-gradient(135deg, rgba(255, 183, 3, 0.24), rgba(10, 143, 106, 0.16));
+    }
+
+    .service-spotlight {
+      position: relative;
+      padding-top: 4.5rem;
+      padding-bottom: 5rem;
+    }
+
+    .service-spotlight::before {
+      content: "";
+      position: absolute;
+      inset: 1rem 0 0;
+      background:
+        radial-gradient(circle at top center, rgba(255, 183, 3, 0.18), transparent 24%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(229, 245, 237, 0.95));
+      border-top: 1px solid rgba(18, 52, 77, 0.05);
+      z-index: -1;
+    }
+
+    .service-spotlight .service-panel {
+      position: relative;
+      overflow: hidden;
+      padding-top: 1.7rem;
+    }
+
+    .service-spotlight .service-panel::after {
+      content: attr(data-label);
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(18, 52, 77, 0.42);
+    }
+
+    .service-spotlight .service-icon {
+      background: linear-gradient(135deg, rgba(255, 183, 3, 0.18), rgba(89, 195, 255, 0.14), rgba(10, 143, 106, 0.18));
+      box-shadow: inset 0 0 0 1px rgba(18, 52, 77, 0.05);
+    }
+
+    .service-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-bottom: 0.8rem;
+      padding: 0.42rem 0.78rem;
+      border-radius: 999px;
+      background: rgba(10, 143, 106, 0.08);
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .service-points {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .service-points li {
+      display: flex;
+      gap: 0.65rem;
+      color: var(--text);
+      font-size: 0.94rem;
+    }
+
+    .service-points li i {
+      color: var(--secondary);
+    }
+
+    .project-panel img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 18px;
+      margin-bottom: 1rem;
+      box-shadow: 0 16px 30px rgba(18, 52, 77, 0.14);
+    }
+
+    .project-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(255, 183, 3, 0.18), rgba(89, 195, 255, 0.2));
+      color: var(--primary-dark);
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 0.9rem;
+    }
+
+    .quote-wrap {
+      padding-bottom: 5rem;
+    }
+
+    .quote-panel {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(239, 247, 255, 0.96));
+      padding: 2rem;
+    }
+
+    .quote-panel .form-control {
+      border-radius: 14px;
+      border: 1px solid rgba(21, 32, 43, 0.12);
+      padding: 0.9rem 1rem;
+      box-shadow: none;
+    }
+
+    .quote-panel .form-control:focus {
+      border-color: rgba(13, 92, 59, 0.5);
+      box-shadow: 0 0 0 0.2rem rgba(13, 92, 59, 0.12);
+    }
+
+    .quote-promise {
+      background: linear-gradient(160deg, #12344d, #0a8f6a 58%, #ff7f50 120%);
+      color: #fff;
+      border-radius: 24px;
+      padding: 2rem;
+      height: 100%;
+      box-shadow: 0 28px 70px rgba(8, 44, 46, 0.22);
+    }
+
+    .quote-promise ul {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0 0;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .quote-promise li {
+      display: flex;
+      gap: 0.75rem;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .quote-promise i {
+      color: #fff0a6;
+    }
+
+    .documentation-band {
+      padding: 4.5rem 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(225, 246, 238, 0.92));
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .documentation-panel {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 2rem;
+    }
+
+    .documentation-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .documentation-item {
+      min-height: 112px;
+      padding: 1rem;
+      border: 1px solid rgba(22, 37, 54, 0.08);
+      border-radius: 16px;
+      background: linear-gradient(180deg, #f8fdff, #eef8f2);
+    }
+
+    .documentation-item i {
+      color: var(--primary);
+      font-size: 1.4rem;
+    }
+
+    .documentation-item strong {
+      display: block;
+      margin: 0.55rem 0 0.25rem;
+      font-weight: 800;
+    }
+
+    .documentation-item span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-pro {
+      background: linear-gradient(135deg, #0c1f2f, #12344d);
+      color: rgba(255, 255, 255, 0.76);
+      padding: 1.5rem 0;
+    }
+
+    .footer-pro strong {
+      color: #fff;
+    }
+
+    .btn-hero-primary:hover,
+    .btn-hero-secondary:hover {
+      transform: translateY(-2px);
+      transition: 0.25s ease;
+    }
+
+    @media (max-width: 991.98px) {
+      .hero-copy,
+      .hero-panel {
+        padding: 2rem;
+      }
+
+      .impact-grid,
+      .brand-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .section-heading {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      .hero-pro {
+        padding-top: 7rem;
+      }
+
+      .hero-points,
+      .impact-grid,
+      .brand-strip,
+      .documentation-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy,
+      .hero-panel,
+      .quote-panel,
+      .quote-promise,
+      .documentation-panel {
+        padding: 1.5rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .btn-hero-primary,
+      .btn-hero-secondary {
+        justify-content: center;
+        width: 100%;
+      }
+    }
+
+    @keyframes bgAnim {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes textAnim {
+      0% { opacity: 0; transform: translateY(20px); }
+      50% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 1; }
+    }
+
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(-45deg, #f8fdff, #eef7ef, #ffffff, #d7f1ff, #ffe29a);
+      background-size: 400% 400%;
+      animation: bgAnim 4s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 1s ease-out;
+    }
+
+    .preloader-content {
+      text-align: center;
+    }
+
+    #loading-text {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #12344d;
+      font-weight: 600;
+      animation: textAnim 2s ease-in-out 1s both;
+    }
+
+    #preloader.fade-out {
+      opacity: 0;
+    }
+
+    #logo-anim {
+      animation: logoAnim 3s ease-in-out;
+      height: 90px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="preloader">
+    <div class="preloader-content">
+      <img src="{% static 'images/sk-solar-logo.png' %}" alt="SK Solar Logo" id="logo-anim">
+      <p id="loading-text">Welcome to SK Solar Technology</p>
+    </div>
+  </div>
+  {% include 'navbar.html' %}
+
+  <section class="hero-pro">
+    <div class="container">
+      <div class="hero-shell">
+        <div class="row g-0 align-items-stretch">
+          <div class="col-lg-7">
+            <div class="hero-copy">
+              <span class="section-eyebrow">
+                <i class="bi bi-sun-fill"></i>
+                Smart Solar Solutions
+              </span>
+              <h1 class="hero-title">
+                Professional solar systems for a
+                <span class="accent">cleaner, lower-cost future.</span>
+              </h1>
+              <p>
+                SK Solar Technology helps homes, businesses, and industrial facilities move to reliable solar power with better planning, cleaner execution, and dependable post-installation support.
+              </p>
+              <div class="hero-actions">
+                <a href="#quote-form" class="btn-hero-primary">
+                  <i class="bi bi-arrow-up-right-circle"></i>
+                  Request Free Quote
+                </a>
+                <a href="#products" class="btn-hero-secondary">
+                  <i class="bi bi-grid"></i>
+                  Explore Products
+                </a>
+              </div>
+              <div class="hero-points">
+                <div class="hero-point">
+                  <strong>Residential</strong>
+                  <span>Rooftop systems designed for daily savings.</span>
+                </div>
+                <div class="hero-point">
+                  <strong>Commercial</strong>
+                  <span>Scalable installations built around ROI.</span>
+                </div>
+                <div class="hero-point">
+                  <strong>Industrial</strong>
+                  <span>Heavy-duty solutions with long-term reliability.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="hero-panel">
+              <div class="hero-panel-card">
+                <span class="section-eyebrow text-dark bg-warning-subtle border-0">Why SK Solar</span>
+                <h4>Complete project guidance from consultation to maintenance</h4>
+                <p class="mb-0">We combine brand-backed products, practical system design, and clear communication so clients can invest with confidence.</p>
+              </div>
+
+              <div class="hero-panel-card mb-0">
+                <h4>What clients usually look for</h4>
+                <ul class="mini-list">
+                  <li><i class="bi bi-check2-circle"></i><span>High-efficiency panels from trusted manufacturers</span></li>
+                  <li><i class="bi bi-check2-circle"></i><span>Transparent planning for site size, load, and energy output</span></li>
+                  <li><i class="bi bi-check2-circle"></i><span>Strong support after installation and performance checks</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="impact-grid">
+        <div class="glass-card stat-card">
+          <div class="impact-icon"><i class="bi bi-lightning-charge"></i></div>
+          <span class="impact-value">10+ Years</span>
+          <p class="mb-0">Focused solar experience across different customer segments.</p>
+        </div>
+        <div class="glass-card stat-card">
+          <div class="impact-icon"><i class="bi bi-buildings"></i></div>
+          <span class="impact-value">End-to-End</span>
+          <p class="mb-0">Consultation, product supply, installation support, and maintenance.</p>
+        </div>
+        <div class="glass-card stat-card">
+          <div class="impact-icon"><i class="bi bi-shield-check"></i></div>
+          <span class="impact-value">Trusted Brands</span>
+          <p class="mb-0">Panels and components sourced from established solar manufacturers.</p>
+        </div>
+        <div class="glass-card stat-card">
+          <div class="impact-icon"><i class="bi bi-graph-up-arrow"></i></div>
+          <span class="impact-value">Higher ROI</span>
+          <p class="mb-0">Systems aligned to energy savings, uptime, and long-term value.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-block section-spotlight partners-showcase">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <span class="section-eyebrow text-dark bg-warning-subtle border-0">Trusted Partners</span>
+          <h2 class="section-title">Premium solar brands for reliable performance.</h2>
+        </div>
+        <p class="section-subtitle">We work with recognized manufacturers so your project starts with dependable hardware, stronger warranties, and proven output.</p>
+      </div>
+
+      <div class="brand-strip">
+        <div class="brand-chip">
+          <div class="brand-chip-top">
+            <span class="brand-mark"><i class="bi bi-sunrise"></i></span>
+            <span class="brand-badge">High Output</span>
+          </div>
+          <strong>Tata Power Solar</strong>
+          <p>Premium modules for consistent, high-efficiency generation.</p>
+          <span class="brand-note"><i class="bi bi-arrow-up-right"></i>Built for long-term confidence</span>
+        </div>
+        <div class="brand-chip">
+          <div class="brand-chip-top">
+            <span class="brand-mark"><i class="bi bi-stars"></i></span>
+            <span class="brand-badge">Value Pick</span>
+          </div>
+          <strong>Waaree Solar</strong>
+          <p>Popular systems known for durability and value.</p>
+          <span class="brand-note"><i class="bi bi-arrow-up-right"></i>Balanced cost and reliability</span>
+        </div>
+        <div class="brand-chip">
+          <div class="brand-chip-top">
+            <span class="brand-mark"><i class="bi bi-lightning-charge"></i></span>
+            <span class="brand-badge">Scalable</span>
+          </div>
+          <strong>Adani Solar</strong>
+          <p>Advanced panel technology for scalable deployments.</p>
+          <span class="brand-note"><i class="bi bi-arrow-up-right"></i>Strong fit for growth projects</span>
+        </div>
+        <div class="brand-chip">
+          <div class="brand-chip-top">
+            <span class="brand-mark"><i class="bi bi-grid-1x2"></i></span>
+            <span class="brand-badge">Adaptable</span>
+          </div>
+          <strong>Premier Solar</strong>
+          <p>Flexible solar solutions for varied installation needs.</p>
+          <span class="brand-note"><i class="bi bi-arrow-up-right"></i>Useful across mixed layouts</span>
+        </div>
+        <div class="brand-chip">
+          <div class="brand-chip-top">
+            <span class="brand-mark"><i class="bi bi-shield-check"></i></span>
+            <span class="brand-badge">Reliable</span>
+          </div>
+          <strong>UTL Solar</strong>
+          <p>Reliable solutions backed by broad product compatibility.</p>
+          <span class="brand-note"><i class="bi bi-arrow-up-right"></i>Easy integration with practical setups</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="product-showcase" id="products">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <span class="section-eyebrow">Product Range</span>
+          <h2 class="section-title">Solar products selected for efficiency, durability, and support.</h2>
+        </div>
+        <p class="section-subtitle">Each option below is presented in a cleaner, more decision-friendly format so visitors can understand the value quickly.</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="service-panel">
+            <div class="project-meta"><i class="bi bi-award"></i> Premium Choice</div>
+            <h4><a class="service-link" href="{% url 'tata' %}">Tata Power Solar</a></h4>
+            <p>High-efficiency solar panels with premium engineering and dependable long-term output.</p>
+            <ul class="service-points">
+              <li><i class="bi bi-check2"></i><span>Strong brand trust and warranty confidence</span></li>
+              <li><i class="bi bi-check2"></i><span>Suitable for both homes and commercial spaces</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="service-panel">
+            <div class="project-meta"><i class="bi bi-star"></i> Best Seller</div>
+            <h4><a class="service-link" href="{% url 'waaree' %}">Waaree Solar</a></h4>
+            <p>Reliable and cost-effective panels designed for broad use cases and strong everyday performance.</p>
+            <ul class="service-points">
+              <li><i class="bi bi-check2"></i><span>Balanced pricing and output for faster decision-making</span></li>
+              <li><i class="bi bi-check2"></i><span>Proven option for residential and commercial demand</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="service-panel">
+            <div class="project-meta"><i class="bi bi-lightning-charge"></i> Popular</div>
+            <h4><a class="service-link" href="{% url 'adani' %}">Adani Solar</a></h4>
+            <p>Performance-driven technology built to support installations where output and reliability both matter.</p>
+            <ul class="service-points">
+              <li><i class="bi bi-check2"></i><span>Modern solar technology for better energy yield</span></li>
+              <li><i class="bi bi-check2"></i><span>Useful for larger and growth-oriented projects</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+          <div class="service-panel">
+            <div class="project-meta"><i class="bi bi-diagram-3"></i> Flexible Fit</div>
+            <h4><a class="service-link" href="{% url 'premier' %}">Premier Solar</a></h4>
+            <p>A practical product line for customers looking for adaptable system configurations without compromising quality.</p>
+            <ul class="service-points">
+              <li><i class="bi bi-check2"></i><span>Supports varied project scales and layouts</span></li>
+              <li><i class="bi bi-check2"></i><span>Clean performance profile with long-life expectations</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+          <div class="service-panel">
+            <div class="project-meta"><i class="bi bi-globe2"></i> Top Rated</div>
+            <h4><a class="service-link" href="{% url 'utl' %}">UTL Solar</a></h4>
+            <p>Dependable systems for buyers who want broad compatibility, stable performance, and trusted support.</p>
+            <ul class="service-points">
+              <li><i class="bi bi-check2"></i><span>Works well across multiple application types</span></li>
+              <li><i class="bi bi-check2"></i><span>Designed for long-term reliability and practical value</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-spotlight">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <span class="section-eyebrow text-dark bg-warning-subtle border-0">Services</span>
+          <h2 class="section-title">Complete solar services built around project clarity.</h2>
+        </div>
+        <p class="section-subtitle">From residential rooftops to industrial energy systems, the service presentation now feels more premium, organized, and conversion-focused.</p>
+      </div>
+
+        <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="service-panel" data-label="Homes">
+            <div class="service-icon"><i class="bi bi-house-door"></i></div>
+            <span class="service-kicker"><i class="bi bi-sun"></i>Smart Rooftops</span>
+            <h4><a class="service-link" href="{% url 'residential' %}">Residential Solar</a></h4>
+            <p>Well-planned rooftop systems that reduce electricity bills while maintaining a clean visual finish.</p>
+            <ul class="service-points">
+              <li><i class="bi bi-check2"></i><span>Custom sizing based on home usage</span></li>
+              <li><i class="bi bi-check2"></i><span>Monitoring and maintenance guidance</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="service-panel" data-label="Business">
+            <div class="service-icon"><i class="bi bi-building"></i></div>
+            <span class="service-kicker"><i class="bi bi-briefcase"></i>Efficiency First</span>
+            <h4><a class="service-link" href="{% url 'commercial' %}">Commercial Solar</a></h4>
+            <p>Business-ready solar infrastructure designed to improve operating efficiency and energy control.</p>
+            <ul class="service-points">
+              <li><i class="bi bi-check2"></i><span>ROI-focused planning and deployment</span></li>
+              <li><i class="bi bi-check2"></i><span>Scalable systems for future growth</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="service-panel" data-label="Heavy Duty">
+            <div class="service-icon"><i class="bi bi-gear-wide-connected"></i></div>
+            <span class="service-kicker"><i class="bi bi-activity"></i>Built to Scale</span>
+            <h4><a class="service-link" href="{% url 'industrial' %}">Industrial Solar</a></h4>
+            <p>Robust solar solutions tailored for large facilities, factories, and heavy-duty energy requirements.</p>
+            <ul class="service-points">
+              <li><i class="bi bi-check2"></i><span>Custom engineering for demanding loads</span></li>
+              <li><i class="bi bi-check2"></i><span>Reliable output for high-consumption environments</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="service-panel" data-label="Support">
+            <div class="service-icon"><i class="bi bi-tools"></i></div>
+            <span class="service-kicker"><i class="bi bi-shield-check"></i>Stay Efficient</span>
+            <h4><a class="service-link" href="{% url 'solar_maintenance' %}">Solar Maintenance</a></h4>
+            <p>Performance checks and preventive support that help systems stay efficient throughout their lifecycle.</p>
+            <ul class="service-points">
+              <li><i class="bi bi-check2"></i><span>Routine inspections and upkeep</span></li>
+              <li><i class="bi bi-check2"></i><span>Responsive issue resolution support</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="service-panel" data-label="Government Help">
+            <div class="service-icon"><i class="bi bi-cash-coin"></i></div>
+            <span class="service-kicker"><i class="bi bi-file-earmark-text"></i>Save More</span>
+            <h4><a class="service-link" href="{% url 'contact' %}">Solar Subsidy Assistance</a></h4>
+            <p>Guidance for subsidy-related steps, documentation support, and clearer planning for eligible solar installations.</p>
+            <ul class="service-points">
+              <li><i class="bi bi-check2"></i><span>Help understanding available subsidy process and requirements</span></li>
+              <li><i class="bi bi-check2"></i><span>Support with paperwork coordination and next-step guidance</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-block pt-0">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <span class="section-eyebrow text-dark bg-warning-subtle border-0">Recent Work</span>
+          <h2 class="section-title">Projects that show capability, scale, and execution quality.</h2>
+        </div>
+        <p class="section-subtitle">The project cards now read more like a professional portfolio and less like a plain gallery, which helps build trust faster.</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6">
+          <div class="project-panel">
+            <img src="{% static 'images/solar4.jpg' %}" alt="Residential rooftop solar installation">
+            <div class="project-meta"><i class="bi bi-house-heart"></i> Residential</div>
+            <h5>Rooftop Solar Installation</h5>
+            <p>Designed to improve household energy savings with efficient panel placement and dependable output.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="project-panel">
+            <img src="{% static 'images/solar3.jpg' %}" alt="Commercial solar array project">
+            <div class="project-meta"><i class="bi bi-shop"></i> Commercial</div>
+            <h5>Commercial Solar Array</h5>
+            <p>Built for businesses seeking lower operating costs, stronger sustainability positioning, and scalable power support.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="project-panel">
+            <img src="{% static 'images/solar5.jpg' %}" alt="Utility scale solar deployment">
+            <div class="project-meta"><i class="bi bi-broadcast-pin"></i> Utility</div>
+            <h5>Solar Farm Deployment</h5>
+            <p>Large-format implementation focused on efficient clean-energy generation at a much broader scale.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="project-panel">
+            <img src="{% static 'images/solar3.jpg' %}" alt="Industrial solar system solution">
+            <div class="project-meta"><i class="bi bi-briefcase"></i> Industrial</div>
+            <h5>Industrial Solar Solution</h5>
+            <p>Configured for factories and energy-intensive operations that need dependable output over the long term.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="documentation-band" id="project-documentation">
+    <div class="container">
+      <div class="documentation-panel">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-5">
+            <span class="section-eyebrow text-dark bg-warning-subtle border-0">
+              <i class="bi bi-journal-code"></i>
+              Project Documentation
+            </span>
+            <h2 class="section-title mt-3">Complete technical documentation with diagrams.</h2>
+            <p class="section-subtitle mb-4">Open the full project documentation for setup steps, routes, models, deployment notes, and Mermaid diagrams for the SK Solar Django website.</p>
+            <a href="{% url 'project_documentation' %}" class="btn-hero-primary" target="_blank" rel="noopener">
+              <i class="bi bi-box-arrow-up-right"></i>
+              Open Documentation
+            </a>
+          </div>
+
+          <div class="col-lg-7">
+            <div class="documentation-grid">
+              <div class="documentation-item">
+                <i class="bi bi-diagram-3"></i>
+                <strong>Architecture</strong>
+                <span>System, route, request, and deployment diagrams.</span>
+              </div>
+              <div class="documentation-item">
+                <i class="bi bi-database"></i>
+                <strong>Models</strong>
+                <span>Class, ER, form data, and database migration diagrams.</span>
+              </div>
+              <div class="documentation-item">
+                <i class="bi bi-person-check"></i>
+                <strong>Use Cases</strong>
+                <span>Use case, activity, state chart, and user flow diagrams.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote-wrap" id="quote-form">
+    <div class="container">
+      <div class="row g-4 align-items-stretch">
+        <div class="col-lg-5">
+          <div class="quote-promise">
+            <span class="section-eyebrow">
+              <i class="bi bi-chat-dots-fill"></i>
+              Free Consultation
+            </span>
+            <h2 class="mt-3 mb-3" style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;">Start your solar project with a clear, professional quote.</h2>
+            <p class="mb-0" style="color: rgba(255, 255, 255, 0.82);">Share your requirement and we will help you understand the right direction for your property, budget, and energy goals.</p>
+            <ul>
+              <li><i class="bi bi-check2-circle"></i><span>Project discussion based on your site and usage needs</span></li>
+              <li><i class="bi bi-check2-circle"></i><span>Guidance on suitable solar brands and service options</span></li>
+              <li><i class="bi bi-check2-circle"></i><span>Clear next steps for installation planning and support</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-7">
+          <div class="quote-panel">
+            <span class="section-eyebrow text-dark bg-warning-subtle border-0">Request Quote</span>
+            <h2 class="section-title" style="font-size: clamp(1.8rem, 3vw, 2.7rem);">Tell us about your requirement.</h2>
+            <p>We have kept the form simple and professional so visitors can reach out quickly without friction.</p>
+
+            <form method="POST" class="mt-4">
+              {% csrf_token %}
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                    class="form-control"
+                    pattern="[A-Za-z ]{3,30}"
+                    title="Name should contain only letters and minimum 3 characters"
+                    required>
+                </div>
+
+                <div class="col-md-6">
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                    class="form-control"
+                    required>
+                </div>
+
+                <div class="col-12">
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Your Phone"
+                    class="form-control"
+                    pattern="[0-9]{10}"
+                    title="Phone number must be 10 digits"
+                    required>
+                </div>
+
+                <div class="col-12">
+                  <textarea
+                    name="message"
+                    placeholder="Tell us about your property, location, or energy requirement"
+                    class="form-control"
+                    rows="5"
+                    minlength="10"
+                    title="Message must be at least 10 characters"
+                    required></textarea>
+                </div>
+
+                <div class="col-12">
+                  <button type="submit" class="btn btn-warning w-100 py-3 fw-bold">Request a Quote</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer-pro">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+      <p class="mb-0"><strong>SK Solar Technology</strong> | Clean energy solutions for homes, businesses, and industry.</p>
+      <p class="mb-0 footer-note">Copyright &copy; 2026 SK Solar Technology</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+
+  <script>
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.getElementById('preloader').classList.add('fade-out');
+        setTimeout(function() {
+          document.getElementById('preloader').style.display = 'none';
+        }, 1000);
+      }, 3000);
+    });
+  </script>
+</body>
+</html>

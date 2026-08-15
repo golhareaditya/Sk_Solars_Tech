@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+ {% load static %}
+<head>
+
+<title>Our Projects | SK Solar Technology</title>
+<link rel="icon" href="{% static 'images/sk-solar-logo.png' %}" type="image/png">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+ <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+<style>
+body{
+font-family:'Manrope',sans-serif;
+background:#f4f7f2;
+color:#1c3f32;
+}
+
+.projects-hero{
+position:relative;
+overflow:hidden;
+padding:110px 0 90px;
+background:
+linear-gradient(135deg,rgba(5,28,21,0.94),rgba(17,61,46,0.9)),
+url("{% static 'images/solar4.jpg' %}") center/cover no-repeat;
+color:#fff;
+}
+
+.projects-hero::before{
+content:"";
+position:absolute;
+inset:auto auto -110px -80px;
+width:280px;
+height:280px;
+background:radial-gradient(circle,rgba(255,193,7,0.28),rgba(255,193,7,0));
+}
+
+.projects-hero::after{
+content:"";
+position:absolute;
+top:40px;
+right:-60px;
+width:260px;
+height:260px;
+border-radius:32px;
+background:linear-gradient(135deg,rgba(255,255,255,0.12),rgba(255,255,255,0.02));
+transform:rotate(24deg);
+backdrop-filter:blur(4px);
+}
+
+.hero-copy{
+position:relative;
+z-index:1;
+max-width:650px;
+}
+
+.hero-kicker{
+display:inline-flex;
+align-items:center;
+gap:10px;
+padding:10px 16px;
+border-radius:999px;
+background:rgba(255,255,255,0.12);
+border:1px solid rgba(255,255,255,0.18);
+font-size:14px;
+letter-spacing:0.08em;
+text-transform:uppercase;
+margin-bottom:22px;
+}
+
+.hero-copy h1{
+font-size:clamp(2.5rem,4vw,4.5rem);
+font-weight:800;
+line-height:1.05;
+margin-bottom:18px;
+}
+
+.hero-copy p{
+max-width:560px;
+font-size:1.05rem;
+color:rgba(255,255,255,0.82);
+margin-bottom:28px;
+}
+
+.hero-metrics{
+display:flex;
+flex-wrap:wrap;
+gap:14px;
+margin-top:26px;
+}
+
+.hero-metric{
+min-width:150px;
+padding:18px 20px;
+border-radius:22px;
+background:rgba(255,255,255,0.1);
+border:1px solid rgba(255,255,255,0.14);
+backdrop-filter:blur(10px);
+}
+
+.hero-metric strong{
+display:block;
+font-size:1.7rem;
+font-weight:800;
+}
+
+.hero-metric span{
+color:rgba(255,255,255,0.72);
+font-size:0.92rem;
+}
+
+.featured-band{
+margin-top:-52px;
+position:relative;
+z-index:2;
+}
+
+.featured-wrap{
+background:#fffdf8;
+border-radius:28px;
+box-shadow:0 24px 60px rgba(16,35,28,0.12);
+overflow:hidden;
+}
+
+.featured-panel{
+padding:34px;
+height:100%;
+}
+
+.featured-panel.dark{
+background:linear-gradient(135deg,#10231c,#1b3a2f);
+color:#fff;
+}
+
+.eyebrow{
+display:inline-block;
+font-size:0.78rem;
+font-weight:800;
+letter-spacing:0.12em;
+text-transform:uppercase;
+color:#d1a600;
+margin-bottom:14px;
+}
+
+.featured-panel h2,
+.featured-panel h3{
+font-weight:800;
+margin-bottom:14px;
+}
+
+.featured-panel p{
+color:rgba(16,35,28,0.72);
+line-height:1.7;
+}
+
+.featured-panel.dark p{
+color:rgba(255,255,255,0.75);
+}
+
+.timeline-list{
+display:grid;
+grid-template-columns:repeat(3,minmax(0,1fr));
+gap:16px;
+margin-top:26px;
+}
+
+.timeline-card{
+padding:16px;
+border-radius:20px;
+background:rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,0.1);
+}
+
+.timeline-card strong{
+display:block;
+font-size:1.2rem;
+margin-bottom:6px;
+}
+
+.timeline-card span{
+font-size:0.92rem;
+color:rgba(255,255,255,0.7);
+}
+
+.featured-tags{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:20px;
+}
+
+.featured-tag{
+padding:9px 14px;
+border-radius:999px;
+background:#ecf3ee;
+color:#1b3a2f;
+font-weight:700;
+font-size:0.88rem;
+}
+
+.stats-section{
+padding:84px 0 36px;
+}
+
+.stat-card{
+height:100%;
+padding:28px 24px;
+border-radius:24px;
+background:#fff;
+box-shadow:0 16px 40px rgba(16,35,28,0.08);
+border:1px solid rgba(16,35,28,0.06);
+text-align:center;
+}
+
+.stat-icon{
+width:62px;
+height:62px;
+margin:0 auto 18px;
+border-radius:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:1.35rem;
+background:linear-gradient(135deg,#ffc107,#ff9f1c);
+color:#10231c;
+}
+
+.counter{
+font-size:2.4rem;
+font-weight:800;
+margin-bottom:4px;
+}
+
+.project-gallery{
+padding:34px 0 90px;
+}
+
+.gallery-head{
+display:flex;
+justify-content:space-between;
+align-items:end;
+gap:20px;
+margin-bottom:30px;
+}
+
+.gallery-head h2{
+font-size:clamp(2rem,3vw,3rem);
+font-weight:800;
+margin-bottom:10px;
+}
+
+.gallery-head p{
+max-width:560px;
+margin:0;
+color:#5b6a63;
+}
+
+.filter-pills{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:18px;
+}
+
+.filter-btn{
+border:none;
+padding:12px 18px;
+border-radius:999px;
+background:#e6eee9;
+color:#18362b;
+font-weight:700;
+transition:all 0.25s ease;
+}
+
+.filter-btn.active,
+.filter-btn:hover{
+background:#18362b;
+color:#fff;
+transform:translateY(-2px);
+}
+
+.project-card{
+height:100%;
+border:none;
+border-radius:28px;
+overflow:hidden;
+background:#fff;
+box-shadow:0 18px 45px rgba(16,35,28,0.1);
+transition:transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.project-card:hover{
+transform:translateY(-10px);
+box-shadow:0 26px 55px rgba(16,35,28,0.16);
+}
+
+.project-media{
+position:relative;
+height:240px;
+overflow:hidden;
+}
+
+.project-media img{
+width:100%;
+height:100%;
+object-fit:cover;
+transition:transform 0.45s ease;
+}
+
+.project-card:hover .project-media img{
+transform:scale(1.08);
+}
+
+.project-gradient{
+position:absolute;
+inset:0;
+background:linear-gradient(180deg,rgba(7,28,22,0.04),rgba(7,28,22,0.7));
+}
+
+.project-badge{
+position:absolute;
+top:18px;
+left:18px;
+padding:9px 14px;
+border-radius:999px;
+background:rgba(255,255,255,0.92);
+color:#143126;
+font-size:0.82rem;
+font-weight:800;
+}
+
+.project-power{
+position:absolute;
+right:18px;
+bottom:18px;
+padding:9px 14px;
+border-radius:14px;
+background:rgba(255,193,7,0.94);
+color:#10231c;
+font-weight:800;
+}
+
+.project-body{
+padding:24px;
+}
+
+.project-meta{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:12px;
+margin-bottom:12px;
+color:#6b7b73;
+font-size:0.92rem;
+}
+
+.project-title{
+font-size:1.35rem;
+font-weight:800;
+margin-bottom:12px;
+}
+
+.project-description{
+color:#5b6a63;
+line-height:1.7;
+margin-bottom:18px;
+}
+
+.project-highlights{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.project-highlights span{
+padding:8px 12px;
+border-radius:999px;
+background:#edf4ef;
+font-size:0.82rem;
+font-weight:700;
+color:#1b3a2f;
+}
+
+.feedback-section{
+padding:0 0 96px;
+}
+
+.feedback-shell{
+background:linear-gradient(135deg,#fffdf7,#eef6f0);
+border-radius:32px;
+padding:38px;
+box-shadow:0 24px 60px rgba(16,35,28,0.1);
+border:1px solid rgba(16,35,28,0.08);
+}
+
+.feedback-intro{
+max-width:620px;
+margin-bottom:28px;
+}
+
+.feedback-intro h2{
+font-size:clamp(2rem,3vw,3rem);
+font-weight:800;
+margin-bottom:12px;
+}
+
+.feedback-intro p{
+margin:0;
+color:#5b6a63;
+line-height:1.75;
+}
+
+.feedback-form .form-control{
+border:none;
+border-radius:18px;
+padding:15px 18px;
+background:#fff;
+box-shadow:inset 0 0 0 1px rgba(16,35,28,0.08);
+}
+
+.feedback-form .form-control:focus{
+box-shadow:0 0 0 0.2rem rgba(255,193,7,0.18);
+}
+
+.feedback-form textarea.form-control{
+min-height:150px;
+resize:vertical;
+}
+
+.rating-select{
+display:flex;
+flex-direction:row-reverse;
+justify-content:flex-end;
+gap:8px;
+padding:14px 18px;
+border-radius:18px;
+background:#fff;
+box-shadow:inset 0 0 0 1px rgba(16,35,28,0.08);
+}
+
+.rating-select input{
+display:none;
+}
+
+.rating-select label{
+font-size:2rem;
+line-height:1;
+color:#cfd9d3;
+cursor:pointer;
+transition:transform 0.2s ease,color 0.2s ease;
+}
+
+.rating-select label:hover,
+.rating-select label:hover ~ label,
+.rating-select input:checked ~ label{
+color:#ffc107;
+transform:translateY(-2px);
+}
+
+.rating-hint{
+display:block;
+margin-top:8px;
+color:#5b6a63;
+font-size:0.9rem;
+}
+
+.feedback-submit{
+border:none;
+border-radius:999px;
+padding:14px 24px;
+font-weight:800;
+background:linear-gradient(135deg,#ffc107,#ff9f1c);
+color:#10231c;
+box-shadow:0 16px 30px rgba(255,159,28,0.25);
+}
+
+.feedback-note{
+margin-top:14px;
+color:#5b6a63;
+font-size:0.92rem;
+}
+
+.feedback-display{
+margin-bottom:34px;
+}
+
+.feedback-marquee{
+position:relative;
+overflow:hidden;
+mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+}
+
+.feedback-track{
+display:flex;
+gap:18px;
+width:max-content;
+animation:feedback-slide 28s linear infinite;
+}
+
+.feedback-marquee:hover .feedback-track{
+animation-play-state:paused;
+}
+
+.feedback-card{
+width:min(360px, calc(100vw - 3rem));
+padding:24px;
+border-radius:26px;
+background:#fff;
+box-shadow:0 18px 45px rgba(16,35,28,0.08);
+border:1px solid rgba(16,35,28,0.06);
+flex:0 0 auto;
+}
+
+.feedback-card-top{
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+gap:14px;
+margin-bottom:16px;
+}
+
+.feedback-user{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.feedback-avatar{
+width:52px;
+height:52px;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+border-radius:16px;
+background:linear-gradient(135deg,rgba(255,193,7,0.2),rgba(42,157,143,0.14));
+color:#143126;
+font-weight:800;
+font-size:1rem;
+}
+
+.feedback-card h3{
+margin:0 0 2px;
+font-size:1.05rem;
+font-weight:800;
+}
+
+.feedback-location{
+font-size:0.92rem;
+color:#6b7b73;
+}
+
+.feedback-stars{
+color:#ffc107;
+letter-spacing:0.08em;
+font-size:0.95rem;
+white-space:nowrap;
+}
+
+.feedback-message{
+margin:0;
+color:#5b6a63;
+line-height:1.75;
+}
+
+@keyframes feedback-slide{
+from{
+transform:translateX(0);
+}
+to{
+transform:translateX(calc(-50% - 9px));
+}
+}
+
+.fade-up{
+opacity:0;
+transform:translateY(34px);
+transition:all 0.8s ease;
+}
+
+.fade-up.show{
+opacity:1;
+transform:translateY(0);
+}
+
+@media (max-width: 991.98px){
+.featured-panel{
+padding:28px;
+}
+.timeline-list{
+grid-template-columns:1fr;
+}
+.gallery-head{
+display:block;
+}
+}
+
+@media (max-width: 767.98px){
+.projects-hero{
+padding:90px 0 72px;
+}
+.hero-metric{
+min-width:unset;
+flex:1 1 100%;
+}
+.featured-band{
+margin-top:-36px;
+}
+.stats-section{
+padding-top:68px;
+}
+.project-media{
+height:220px;
+}
+.feedback-shell{
+padding:26px 20px;
+border-radius:24px;
+}
+.feedback-marquee{
+mask-image:none;
+-webkit-mask-image:none;
+}
+
+.feedback-track{
+animation-duration:22s;
+}
+}
+</style>
+
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+<section class="projects-hero">
+<div class="container">
+<div class="hero-copy fade-up show">
+<div class="hero-kicker">
+<span><i class="fa-solid fa-solar-panel"></i></span>
+<span>Energy Projects Portfolio</span>
+</div>
+<h1>Projects that turn rooftops, campuses, and open land into energy assets.</h1>
+<p>We design and deliver solar systems across residential, commercial, and utility-scale segments with a focus on generation, durability, and long-term value.</p>
+<a href="/contact" class="btn btn-warning btn-lg rounded-pill px-4">Start Your Project</a>
+
+<div class="hero-metrics">
+<div class="hero-metric">
+<strong>150+</strong>
+<span>Installations delivered</span>
+</div>
+<div class="hero-metric">
+<strong>45 MW</strong>
+<span>Total installed capacity</span>
+</div>
+<div class="hero-metric">
+<strong>12+ Years</strong>
+<span>Execution experience</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="featured-band">
+<div class="container">
+<div class="featured-wrap">
+<div class="row g-0">
+<div class="col-lg-7">
+<div class="featured-panel dark">
+<span class="eyebrow">Featured Rollout</span>
+<h2>From first survey to final commissioning, every project follows a measured delivery system.</h2>
+<p>Our execution team balances design precision, structural safety, electrical quality, and installation speed so the system starts delivering power without avoidable delays.</p>
+<div class="timeline-list">
+<div class="timeline-card">
+<strong>01</strong>
+<span>Survey and load analysis</span>
+</div>
+<div class="timeline-card">
+<strong>02</strong>
+<span>Design and engineering approvals</span>
+</div>
+<div class="timeline-card">
+<strong>03</strong>
+<span>Installation, testing, and handover</span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-lg-5">
+<div class="featured-panel">
+<span class="eyebrow">Project Snapshot</span>
+<h3>Commercial rooftop installation with high daytime offset</h3>
+<p>A performance-focused solar deployment designed for office and industrial usage where daytime demand is high and payback speed matters.</p>
+<div class="featured-tags">
+<span class="featured-tag">Net Metering Ready</span>
+<span class="featured-tag">Remote Monitoring</span>
+<span class="featured-tag">High Efficiency Panels</span>
+<span class="featured-tag">Structured Cabling</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="stats-section">
+<div class="container">
+<div class="row g-4">
+<div class="col-md-4 fade-up">
+<div class="stat-card">
+<div class="stat-icon"><i class="fa-solid fa-bolt"></i></div>
+<div class="counter" data-target="150">0</div>
+<p>Total Projects Delivered</p>
+</div>
+</div>
+<div class="col-md-4 fade-up">
+<div class="stat-card">
+<div class="stat-icon"><i class="fa-solid fa-industry"></i></div>
+<div class="counter" data-target="45">0</div>
+<p>MW Installed Capacity</p>
+</div>
+</div>
+<div class="col-md-4 fade-up">
+<div class="stat-card">
+<div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+<div class="counter" data-target="300">0</div>
+<p>Satisfied Residential and Business Clients</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="project-gallery">
+<div class="container">
+<div class="gallery-head">
+<div>
+<h2>Selected Solar Work</h2>
+<p>Browse some of the project categories we execute, from compact home rooftops to larger commercial and utility-focused systems.</p>
+</div>
+<div class="filter-pills">
+<button class="filter-btn active" data-filter="all">All Projects</button>
+<button class="filter-btn" data-filter="residential">Residential</button>
+<button class="filter-btn" data-filter="commercial">Commercial</button>
+<button class="filter-btn" data-filter="farm"> Industrial Solar</button>
+</div>
+</div>
+
+<div class="row g-4">
+<div class="col-md-6 col-xl-4 project-item residential fade-up">
+<article class="project-card">
+<div class="project-media">
+<img src="{% static 'images/p5.jpeg' %}" alt="Residential rooftop solar project">
+<div class="project-gradient"></div>
+<span class="project-badge">Pune Residence</span>
+<span class="project-power">5 kW</span>
+</div>
+<div class="project-body">
+<div class="project-meta">
+<span>Residential</span>
+<span>Fast Payback</span>
+</div>
+<h3 class="project-title">Urban Rooftop Solar for Daily Household Savings</h3>
+<p class="project-description">Designed for limited roof area with optimized panel placement, efficient inverter pairing, and clean cable management.</p>
+<div class="project-highlights">
+<span>Shadow Study</span>
+<span>Net Metering</span>
+<span>Low Maintenance</span>
+</div>
+</div>
+</article>
+</div>
+
+<div class="col-md-6 col-xl-4 project-item commercial fade-up">
+<article class="project-card">
+<div class="project-media">
+<img src="{% static 'images/solar3.jpg' %}" alt="Commercial solar installation">
+<div class="project-gradient"></div>
+<span class="project-badge">Mumbai Office</span>
+<span class="project-power">50 kW</span>
+</div>
+<div class="project-body">
+<div class="project-meta">
+<span>Commercial</span>
+<span>Day Load Offset</span>
+</div>
+<h3 class="project-title">Commercial Rooftop System for High Consumption Hours</h3>
+<p class="project-description">Built to reduce peak daytime grid usage for offices and facilities with steady operational demand.</p>
+<div class="project-highlights">
+<span>Monitoring</span>
+<span>Engineered Mounting</span>
+<span>Performance Focused</span>
+</div>
+</div>
+</article>
+</div>
+
+<div class="col-md-6 col-xl-4 project-item farm fade-up">
+<article class="project-card">
+<div class="project-media">
+<img src="{% static 'images/solar5.jpg' %}" alt="Utility scale solar farm">
+<div class="project-gradient"></div>
+<span class="project-badge">Rajasthan Site</span>
+<span class="project-power">10 MW</span>
+</div>
+<div class="project-body">
+<div class="project-meta">
+<span>Solar Farm</span>
+<span>Utility Scale</span>
+</div>
+<h3 class="project-title">Ground-Mounted Generation for Large Scale Output</h3>
+<p class="project-description">A utility-oriented installation planned for open land, consistent generation, and efficient maintenance access.</p>
+<div class="project-highlights">
+<span>Ground Structure</span>
+<span>Large Output</span>
+<span>Grid Ready</span>
+</div>
+</div>
+</article>
+</div>
+
+<div class="col-md-6 col-xl-4 project-item residential fade-up">
+<article class="project-card">
+<div class="project-media">
+<img src="{% static 'images/solar1.avif' %}" alt="Premium home solar project">
+<div class="project-gradient"></div>
+<span class="project-badge">Nashik Villa</span>
+<span class="project-power">8 kW</span>
+</div>
+<div class="project-body">
+<div class="project-meta">
+<span>Residential</span>
+<span>Premium Home</span>
+</div>
+<h3 class="project-title">Premium Home System with Backup Conscious Planning</h3>
+<p class="project-description">Configured for families looking for stronger savings, smart layout aesthetics, and dependable long-term generation.</p>
+<div class="project-highlights">
+<span>Premium Finish</span>
+<span>Roof Optimized</span>
+<span>High Output</span>
+</div>
+</div>
+</article>
+</div>
+
+<div class="col-md-6 col-xl-4 project-item commercial fade-up">
+<article class="project-card">
+<div class="project-media">
+<img src="{% static 'images/solar6.jpg' %}" alt="Industrial solar rooftop project">
+<div class="project-gradient"></div>
+<span class="project-badge">Factory Unit</span>
+<span class="project-power">120 kW</span>
+</div>
+<div class="project-body">
+<div class="project-meta">
+<span>Commercial</span>
+<span>Industrial Site</span>
+</div>
+<h3 class="project-title">Industrial Rooftop Designed for Production Facilities</h3>
+<p class="project-description">An industrial-grade deployment for manufacturing operations where energy cost control directly impacts operating margins.</p>
+<div class="project-highlights">
+<span>Safety Checks</span>
+<span>Heavy Duty Structure</span>
+<span>Cost Reduction</span>
+</div>
+</div>
+</article>
+</div>
+
+<div class="col-md-6 col-xl-4 project-item farm fade-up">
+<article class="project-card">
+<div class="project-media">
+<img src="{% static 'images/solar4.jpg' %}" alt="Open field solar power project">
+<div class="project-gradient"></div>
+<span class="project-badge">Open Field Plant</span>
+<span class="project-power">3.5 MW</span>
+</div>
+<div class="project-body">
+<div class="project-meta">
+<span>Solar Farm</span>
+<span>Scalable Layout</span>
+</div>
+<h3 class="project-title">Expandable Site Layout for Future Capacity Addition</h3>
+<p class="project-description">Planned with future expansion in mind, this site balances current generation goals with long-term capacity flexibility.</p>
+<div class="project-highlights">
+<span>Expandable</span>
+<span>Field Optimized</span>
+<span>Long Life Design</span>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+</section>
+
+<section class="feedback-section">
+<div class="container">
+<div class="feedback-shell fade-up" id="feedback-form">
+<div class="feedback-display">
+<div class="feedback-intro">
+<span class="eyebrow">Recent Reviews</span>
+<h2>Customers are sharing their project experience here.</h2>
+<p>Feedback aur rating ab isi page par right to left scroll me dikh rahe hain, taaki visitors projects dekhte hi customer trust bhi samajh sakein.</p>
+</div>
+
+<div class="feedback-marquee" aria-label="Customer feedback slider">
+<div class="feedback-track">
+{% if feedbacks %}
+{% for feedback in feedbacks %}
+<article class="feedback-card">
+<div class="feedback-card-top">
+<div class="feedback-user">
+<div class="feedback-avatar">{{ feedback.name|slice:":1"|upper }}</div>
+<div>
+<h3>{{ feedback.name }}</h3>
+<span class="feedback-location">{{ feedback.location }}</span>
+</div>
+</div>
+<div class="feedback-stars" aria-label="{{ feedback.rating }} out of 5 stars">{% for _ in "12345"|slice:":5" %}{% if forloop.counter <= feedback.rating %}&#9733;{% else %}&#9734;{% endif %}{% endfor %}</div>
+</div>
+<p class="feedback-message">{{ feedback.message }}</p>
+</article>
+{% endfor %}
+{% for feedback in feedbacks %}
+<article class="feedback-card" aria-hidden="true">
+<div class="feedback-card-top">
+<div class="feedback-user">
+<div class="feedback-avatar">{{ feedback.name|slice:":1"|upper }}</div>
+<div>
+<h3>{{ feedback.name }}</h3>
+<span class="feedback-location">{{ feedback.location }}</span>
+</div>
+</div>
+<div class="feedback-stars" aria-label="{{ feedback.rating }} out of 5 stars">{% for _ in "12345"|slice:":5" %}{% if forloop.counter <= feedback.rating %}&#9733;{% else %}&#9734;{% endif %}{% endfor %}</div>
+</div>
+<p class="feedback-message">{{ feedback.message }}</p>
+</article>
+{% endfor %}
+{% else %}
+<article class="feedback-card">
+<div class="feedback-card-top">
+<div class="feedback-user">
+<div class="feedback-avatar">S</div>
+<div>
+<h3>SK Solar Customer</h3>
+<span class="feedback-location">Maharashtra</span>
+</div>
+</div>
+<div class="feedback-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+</div>
+<p class="feedback-message">Projects dekhne ke baad aapka submitted feedback yahin right to left scroll me show hoga, jisse new visitors ko real client experience dikh sake.</p>
+</article>
+<article class="feedback-card" aria-hidden="true">
+<div class="feedback-card-top">
+<div class="feedback-user">
+<div class="feedback-avatar">S</div>
+<div>
+<h3>SK Solar Customer</h3>
+<span class="feedback-location">Maharashtra</span>
+</div>
+</div>
+<div class="feedback-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+</div>
+<p class="feedback-message">Projects dekhne ke baad aapka submitted feedback yahin right to left scroll me show hoga, jisse new visitors ko real client experience dikh sake.</p>
+</article>
+{% endif %}
+</div>
+</div>
+</div>
+
+<div class="feedback-intro">
+<span class="eyebrow">Customer Feedback</span>
+<h2>Project dekhne ke baad apna feedback bhi share kijiye.</h2>
+<p>Yahan submit kiya gaya feedback admin panel me <strong>Feedback</strong> section me save hoga aur isi Projects page par customer reviews ke roop me dikhai dega.</p>
+</div>
+
+<form method="POST" class="feedback-form">
+{% csrf_token %}
+<div class="row g-3">
+<div class="col-md-6">
+<input type="text" class="form-control" name="feedback_name" placeholder="Your Name" required maxlength="100">
+</div>
+<div class="col-md-6">
+<input type="text" class="form-control" name="feedback_location" placeholder="City / Location" required maxlength="100">
+</div>
+<div class="col-12">
+<div class="rating-select" aria-label="Select your rating">
+<input type="radio" id="rating-5" name="feedback_rating" value="5" checked>
+<label for="rating-5" title="5 stars">&#9733;</label>
+<input type="radio" id="rating-4" name="feedback_rating" value="4">
+<label for="rating-4" title="4 stars">&#9733;</label>
+<input type="radio" id="rating-3" name="feedback_rating" value="3">
+<label for="rating-3" title="3 stars">&#9733;</label>
+<input type="radio" id="rating-2" name="feedback_rating" value="2">
+<label for="rating-2" title="2 stars">&#9733;</label>
+<input type="radio" id="rating-1" name="feedback_rating" value="1">
+<label for="rating-1" title="1 star">&#9733;</label>
+</div>
+<span class="rating-hint">Apni rating select kijiye.</span>
+</div>
+<div class="col-12">
+<textarea class="form-control" name="feedback_message" placeholder="Apna feedback likhiye..." required maxlength="800"></textarea>
+</div>
+<div class="col-12">
+<button type="submit" class="feedback-submit">
+<i class="fa-solid fa-paper-plane"></i>
+Submit Feedback
+</button>
+<p class="feedback-note">Submit kiya gaya feedback upar right to left review slider me dikhai dega.</p>
+</div>
+</div>
+</form>
+</div>
+</div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+const revealItems = document.querySelectorAll('.fade-up');
+const counters = document.querySelectorAll('.counter');
+const filterBtns = document.querySelectorAll('.filter-btn');
+const projects = document.querySelectorAll('.project-item');
+
+if ('IntersectionObserver' in window) {
+const revealObserver = new IntersectionObserver(function (entries, observer) {
+entries.forEach(function (entry) {
+if (entry.isIntersecting) {
+entry.target.classList.add('show');
+observer.unobserve(entry.target);
+}
+});
+}, { threshold: 0.18 });
+
+revealItems.forEach(function (item) {
+revealObserver.observe(item);
+});
+
+const counterObserver = new IntersectionObserver(function (entries, observer) {
+entries.forEach(function (entry) {
+if (!entry.isIntersecting) {
+return;
+}
+
+const counter = entry.target;
+const target = Number(counter.getAttribute('data-target'));
+const duration = 1400;
+const startTime = performance.now();
+
+const updateCounter = function (currentTime) {
+const progress = Math.min((currentTime - startTime) / duration, 1);
+counter.textContent = Math.floor(progress * target);
+
+if (progress < 1) {
+requestAnimationFrame(updateCounter);
+} else {
+counter.textContent = target;
+}
+};
+
+requestAnimationFrame(updateCounter);
+observer.unobserve(counter);
+});
+}, { threshold: 0.45 });
+
+counters.forEach(function (counter) {
+counterObserver.observe(counter);
+});
+} else {
+revealItems.forEach(function (item) {
+item.classList.add('show');
+});
+
+counters.forEach(function (counter) {
+counter.textContent = counter.getAttribute('data-target');
+});
+}
+
+filterBtns.forEach(function (btn) {
+btn.addEventListener('click', function () {
+const filter = btn.getAttribute('data-filter');
+
+filterBtns.forEach(function (button) {
+button.classList.remove('active');
+});
+btn.classList.add('active');
+
+projects.forEach(function (project) {
+const matches = filter === 'all' || project.classList.contains(filter);
+project.style.display = matches ? '' : 'none';
+});
+});
+});
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

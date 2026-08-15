@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: sk-solar
+    runtime: python
+    plan: free
+    buildCommand: "bash build.sh"
+    startCommand: "gunicorn sk_solar.wsgi:application --workers ${WEB_CONCURRENCY:-3} --threads ${GUNICORN_THREADS:-2} --timeout ${GUNICORN_TIMEOUT:-60} --max-requests 1000 --max-requests-jitter 100"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.7
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: false
+      - key: WEB_CONCURRENCY
+        value: "3"
+      - key: GUNICORN_THREADS
+        value: "2"
+      - key: DATABASE_CONN_MAX_AGE
+        value: "600"
+      - key: DATABASE_SSL_REQUIRE
+        value: "true"
+      - key: ALLOWED_HOSTS
+        value: sk-solar.onrender.com,.onrender.com
+      - key: CSRF_TRUSTED_ORIGINS
+        value: https://*.onrender.com
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sk-solar-db
+          property: connectionString
+
+databases:
+  - name: sk-solar-db
+    plan: free

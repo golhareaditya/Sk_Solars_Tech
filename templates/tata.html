@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <title>Tata Power Solar - Details</title>
+    <link rel="icon" href="{% static 'images/sk-solar-logo.png' %}" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Urbanist:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+        :root {
+            --page-bg: #eef6ff;
+            --primary: #0a8f6a;
+            --primary-dark: #12344d;
+            --accent: #ffb703;
+            --secondary: #ff7f50;
+            --sky: #59c3ff;
+            --text: #162536;
+            --muted: #5d6c7c;
+            --border: rgba(22, 37, 54, 0.08);
+            --shadow: 0 24px 60px rgba(35, 84, 122, 0.16);
+        }
+
+        body {
+            background:
+                radial-gradient(circle at top left, rgba(255, 183, 3, 0.2), transparent 24%),
+                radial-gradient(circle at top right, rgba(89, 195, 255, 0.18), transparent 28%),
+                linear-gradient(180deg, #f8fdff 0%, #eef7ef 30%, var(--page-bg) 64%, #ffffff 100%);
+            color: var(--text);
+            font-family: 'Manrope', sans-serif;
+        }
+
+        h1, h2, h3, h4, h5, h6,
+        .btn,
+        .section-eyebrow {
+            font-family: 'Urbanist', sans-serif;
+        }
+
+        .navbar {
+            background: rgba(7, 24, 28, 0.88) !important;
+            backdrop-filter: blur(14px);
+        }
+
+        .section-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 0.9rem;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(255, 183, 3, 0.24), rgba(255, 107, 107, 0.18));
+            color: #fff1bc;
+            font-size: 0.84rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .tata-hero {
+            position: relative;
+            padding: 8.5rem 0 5rem;
+            overflow: hidden;
+        }
+
+        .tata-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(120deg, rgba(10, 26, 34, 0.92), rgba(18, 52, 77, 0.82), rgba(10, 143, 106, 0.48)),
+                url("{% static 'images/solar3.jpg' %}") center/cover no-repeat;
+            z-index: -2;
+        }
+
+        .tata-hero::after {
+            content: "";
+            position: absolute;
+            inset: auto 0 0 0;
+            height: 150px;
+            background: linear-gradient(180deg, rgba(248, 252, 255, 0), rgba(248, 252, 255, 1));
+            z-index: -1;
+        }
+
+        .hero-shell {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 32px;
+            box-shadow: 0 32px 90px rgba(0, 0, 0, 0.26);
+            backdrop-filter: blur(12px);
+            overflow: hidden;
+        }
+
+        .hero-copy,
+        .hero-panel {
+            padding: 3rem;
+            height: 100%;
+        }
+
+        .hero-copy {
+            color: #fff;
+        }
+
+        .hero-title {
+            margin: 1.2rem 0 1rem;
+            font-size: clamp(2.8rem, 5vw, 5rem);
+            line-height: 1.02;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            max-width: 11ch;
+        }
+
+        .hero-title .accent {
+            color: #ffe29a;
+        }
+
+        .hero-copy p {
+            color: rgba(255, 255, 255, 0.82);
+            font-size: 1.04rem;
+            max-width: 40rem;
+            margin-bottom: 1.6rem;
+        }
+
+        .hero-points {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .hero-point {
+            padding: 1rem;
+            border-radius: 18px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.05));
+            border: 1px solid rgba(255, 255, 255, 0.14);
+        }
+
+        .hero-point strong {
+            display: block;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+        }
+
+        .hero-point span {
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 0.92rem;
+        }
+
+        .hero-panel {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(233, 249, 255, 0.93));
+            color: var(--text);
+        }
+
+        .panel-card,
+        .feature-card,
+        .spec-shell,
+        .insight-card,
+        .cta-shell {
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .panel-card {
+            background: linear-gradient(180deg, #ffffff, #fff8e4);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .panel-card h4 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 0.45rem;
+            color: var(--primary-dark);
+        }
+
+        .panel-card p,
+        .check-list li,
+        .section-subtitle,
+        .feature-card p,
+        .spec-table td,
+        .spec-table th,
+        .insight-card p,
+        .footer-note,
+        .cta-shell p {
+            color: var(--muted);
+        }
+
+        .check-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0 0;
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .check-list li {
+            display: flex;
+            gap: 0.7rem;
+            align-items: flex-start;
+        }
+
+        .check-list i,
+        .feature-icon,
+        .insight-icon {
+            color: var(--primary);
+        }
+
+        .section-block {
+            position: relative;
+            padding: 5rem 0;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            margin: 0.75rem 0 0.5rem;
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.05;
+            font-weight: 800;
+            color: var(--primary-dark);
+            max-width: 14ch;
+        }
+
+        .section-subtitle {
+            margin: 0;
+            max-width: 40rem;
+            font-size: 1rem;
+        }
+
+        .product-overview {
+            padding-top: 2.5rem;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .product-visual {
+            position: relative;
+        }
+
+        .product-image {
+            width: 100%;
+            min-height: 460px;
+            object-fit: cover;
+            border-radius: 30px;
+            box-shadow: 0 26px 70px rgba(18, 52, 77, 0.2);
+        }
+
+        .product-badge {
+            position: absolute;
+            padding: 10px 16px;
+            right: 250px;
+            top: 370px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #ffd05a, #ff8f3c);
+            color: #1f2206;
+            box-shadow: 0 12px 45px rgba(255, 143, 60, 0.28);
+        }
+
+        .product-badge strong {
+            display: block;
+            font-size: 1.4rem;
+            line-height: 1;
+            font-weight: 800;
+        }
+
+        .product-card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(242, 249, 255, 0.92));
+            padding: 2rem;
+            border-radius: 30px;
+            border: 1px solid rgba(22, 37, 54, 0.08);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-cta,
+        .btn-outline-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.95rem 1.3rem;
+            border-radius: 14px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .btn-cta {
+            background: linear-gradient(135deg, #ffd05a, #ff8f3c);
+            color: #1f2206;
+            box-shadow: 0 18px 35px rgba(255, 143, 60, 0.28);
+        }
+
+        .btn-outline-cta {
+            border: 1px solid rgba(18, 52, 77, 0.12);
+            color: var(--primary-dark);
+            background: rgba(255, 255, 255, 0.82);
+        }
+
+        .feature-showcase {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-showcase::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(140deg, rgba(18, 52, 77, 0.95), rgba(10, 143, 106, 0.9)),
+                radial-gradient(circle at top right, rgba(255, 183, 3, 0.2), transparent 30%);
+            z-index: -2;
+        }
+
+        .feature-showcase::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(9, 32, 47, 0.22) 100%),
+                repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 140px);
+            z-index: -1;
+            opacity: 0.85;
+        }
+
+        .feature-showcase .section-title,
+        .feature-showcase .section-subtitle {
+            color: #fff;
+        }
+
+        .feature-showcase .section-subtitle {
+            color: rgba(255, 255, 255, 0.76);
+        }
+
+        .feature-card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(239, 248, 244, 0.94));
+            padding: 1.8rem;
+            height: 100%;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .feature-card:hover,
+        .insight-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 28px 65px rgba(35, 84, 122, 0.22);
+        }
+
+        .feature-icon,
+        .insight-icon {
+            width: 62px;
+            height: 62px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(255, 183, 3, 0.18), rgba(89, 195, 255, 0.16), rgba(10, 143, 106, 0.14));
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h4,
+        .insight-card h4 {
+            font-weight: 800;
+            color: var(--primary-dark);
+        }
+
+        .spec-shell {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(242, 249, 255, 0.93));
+            padding: 1.25rem;
+        }
+
+        .spec-table {
+            margin-bottom: 0;
+            overflow: hidden;
+            border-radius: 18px;
+        }
+
+        .spec-table th,
+        .spec-table td {
+            padding: 1rem 1.1rem;
+            border-color: rgba(22, 37, 54, 0.08);
+            background: rgba(255, 255, 255, 0.82);
+        }
+
+        .spec-table th {
+            width: 34%;
+            color: var(--primary-dark);
+            font-weight: 800;
+        }
+
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .insight-card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 248, 230, 0.9));
+            padding: 1.6rem;
+            height: 100%;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .cta-wrap {
+            padding-bottom: 5rem;
+        }
+
+        .cta-shell {
+            background:
+                linear-gradient(135deg, rgba(12, 31, 47, 0.96), rgba(18, 52, 77, 0.92), rgba(10, 143, 106, 0.86));
+            padding: 2.4rem;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .cta-shell::after {
+            content: "";
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 183, 3, 0.3), rgba(255, 183, 3, 0));
+        }
+
+        .footer-pro {
+            background: linear-gradient(135deg, #0c1f2f, #12344d);
+            color: rgba(255, 255, 255, 0.76);
+            padding: 1.5rem 0;
+        }
+
+        .footer-pro strong {
+            color: #fff;
+        }
+
+        @media (max-width: 991.98px) {
+            .hero-copy,
+            .hero-panel {
+                padding: 2rem;
+            }
+
+            .section-heading {
+                flex-direction: column;
+                align-items: start;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .insight-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .tata-hero {
+                padding-top: 7rem;
+            }
+
+            .hero-points,
+            .insight-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-copy,
+            .hero-panel,
+            .product-card,
+            .feature-card,
+            .insight-card,
+            .cta-shell {
+                padding: 1.5rem;
+            }
+
+            .product-image {
+                min-height: 320px;
+            }
+
+            .product-badge {
+                position: static;
+                margin-top: 1rem;
+                display: inline-block;
+            }
+
+            .price-strip {
+                flex-direction: column;
+                align-items: start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+<section class="tata-hero">
+    <div class="container">
+        <div class="hero-shell">
+            <div class="row g-0 align-items-stretch">
+                <div class="col-lg-7">
+                    <div class="hero-copy">
+                        <span class="section-eyebrow">
+                            <i class="bi bi-award-fill"></i>
+                            Tata Power Solar
+                        </span>
+                        <h1 class="hero-title">
+                            Premium solar panels from a
+                            <span class="accent">trusted Indian brand.</span>
+                        </h1>
+                        <p>
+                            Tata Power Solar offers dependable solar modules built for strong efficiency, clean output, and long-term confidence across residential, commercial, and industrial installations.
+                        </p>
+
+                        <div class="hero-points">
+                            <div class="hero-point">
+                                <strong>19% - 22%</strong>
+                                <span>Efficient energy generation across modern module ranges.</span>
+                            </div>
+                            <div class="hero-point">
+                                <strong>25 Years</strong>
+                                <span>Performance warranty designed for long-term trust.</span>
+                            </div>
+                            <div class="hero-point">
+                                <strong>Made in India</strong>
+                                <span>Strong brand credibility with broad market recognition.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="hero-panel">
+                        <div class="panel-card">
+                            <span class="section-eyebrow text-dark bg-warning-subtle border-0">Why It Stands Out</span>
+                            <h4>Reliable performance with premium build quality</h4>
+                            <p class="mb-0">This product line is suitable for clients who want strong engineering confidence, dependable warranty coverage, and a brand that already carries trust in the market.</p>
+                        </div>
+
+                        <div class="panel-card mb-0">
+                            <h4>Best suited for buyers who want</h4>
+                            <ul class="check-list">
+                                <li><i class="bi bi-check2-circle"></i><span>Higher confidence in long-term module quality and output</span></li>
+                                <li><i class="bi bi-check2-circle"></i><span>Well-recognized product support for homes, businesses, and larger projects</span></li>
+                                <li><i class="bi bi-check2-circle"></i><span>Cleaner decision-making with balanced durability and efficiency</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-block product-overview">
+    <div class="container">
+        <div class="section-heading">
+            <div>
+                <span class="section-eyebrow text-dark bg-warning-subtle border-0">Product Overview</span>
+                <h2 class="section-title">Designed for dependable generation and long-term solar value.</h2>
+            </div>
+            <p class="section-subtitle">This page now presents Tata Power Solar more like a premium product landing page, making the details easier to scan and more convincing for serious buyers.</p>
+        </div>
+
+        <div class="product-grid">
+            <div class="product-visual">
+                <img src="{% static 'images/solar3.jpg' %}" alt="Tata Power Solar panel installation" class="product-image">
+                <div class="product-badge">
+                    <strong>Premium Choice</strong>
+                    Trusted for strong output and lasting reliability
+                </div>
+            </div>
+
+            <div class="product-card">
+                <h3 class="mb-3" style="font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 800; color: var(--primary-dark);">Tata Power Solar Panels</h3>
+                <p class="mb-3 text-muted">Tata Power Solar is a leading solar manufacturer in India offering high-quality, durable, and efficient solar panels for residential, commercial, and industrial use.</p>
+
+                <ul class="check-list">
+                    <li><i class="bi bi-check2"></i><span>Efficiency range of 19% to 22% for stronger energy conversion</span></li>
+                    <li><i class="bi bi-check2"></i><span>Mono PERC and TOPCon technology options for modern system planning</span></li>
+                    <li><i class="bi bi-check2"></i><span>25-year performance warranty for long-horizon buyer confidence</span></li>
+                    <li><i class="bi bi-check2"></i><span>Strong module build quality for demanding climate conditions</span></li>
+                    <li><i class="bi bi-check2"></i><span>Made in India with high brand familiarity and trust</span></li>
+                </ul>
+
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="{% url 'contact' %}" class="btn-cta">
+                        <i class="bi bi-arrow-up-right-circle"></i>
+                        Get Quote
+                    </a>
+                    <a href="{% url 'projects' %}" class="btn-outline-cta">
+                        <i class="bi bi-grid"></i>
+                        View Projects
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-block feature-showcase">
+    <div class="container">
+        <div class="section-heading">
+            <div>
+                <span class="section-eyebrow">Why Choose Tata</span>
+                <h2 class="section-title">Reasons this brand remains a strong premium option.</h2>
+            </div>
+            <p class="section-subtitle">The value proposition is clearer here: high efficiency, better warranty confidence, and brand-backed trust that helps buyers move faster.</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="bi bi-lightning-charge"></i></div>
+                    <h4>High Efficiency</h4>
+                    <p>Advanced solar cell technology helps maximize output and makes the system more rewarding over time.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="bi bi-shield-check"></i></div>
+                    <h4>Long Warranty</h4>
+                    <p>Strong warranty coverage improves buyer confidence and supports a more secure long-term investment.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="bi bi-stars"></i></div>
+                    <h4>Trusted Brand</h4>
+                    <p>Backed by Tata Group credibility, the brand feels familiar, reliable, and easier to trust for serious installs.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-block">
+    <div class="container">
+        <div class="section-heading">
+            <div>
+                <span class="section-eyebrow text-dark bg-warning-subtle border-0">Technical Specs</span>
+                <h2 class="section-title">Clear specifications for faster decision-making.</h2>
+            </div>
+            <p class="section-subtitle">Instead of a plain basic table, the specification area now sits inside a cleaner shell that feels more product-focused and professional.</p>
+        </div>
+
+        <div class="spec-shell">
+            <table class="table spec-table align-middle">
+                <tbody>
+                    <tr>
+                        <th>Type</th>
+                        <td>Monocrystalline</td>
+                    </tr>
+                    <tr>
+                        <th>Power Output</th>
+                        <td>400W - 600W</td>
+                    </tr>
+                    <tr>
+                        <th>Efficiency</th>
+                        <td>Up to 22%</td>
+                    </tr>
+                    <tr>
+                        <th>Technology</th>
+                        <td>Mono PERC / TOPCon</td>
+                    </tr>
+                    <tr>
+                        <th>Warranty</th>
+                        <td>25 Years Performance</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="insight-grid">
+            <div class="insight-card">
+                <div class="insight-icon"><i class="bi bi-house-heart"></i></div>
+                <h4>Residential Fit</h4>
+                <p>Well-suited for homeowners who want better reliability and stronger brand confidence with rooftop solar.</p>
+            </div>
+            <div class="insight-card">
+                <div class="insight-icon"><i class="bi bi-building-check"></i></div>
+                <h4>Commercial Fit</h4>
+                <p>Useful for businesses looking to balance output quality, brand trust, and professional system presentation.</p>
+            </div>
+            <div class="insight-card">
+                <div class="insight-icon"><i class="bi bi-gear"></i></div>
+                <h4>Industrial Fit</h4>
+                <p>Works well where durability, higher confidence, and structured long-term energy planning matter most.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-wrap">
+    <div class="container">
+        <div class="cta-shell">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-8">
+                    <span class="section-eyebrow">
+                        <i class="bi bi-chat-dots-fill"></i>
+                        Free Consultation
+                    </span>
+                    <h3 class="mt-3 mb-2" style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;">Interested in Tata Power Solar for your project?</h3>
+                    <p>Connect with SK Solar Technology for pricing guidance, system recommendations, and the right installation plan for your site.</p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <a href="{% url 'contact' %}" class="btn-cta">
+                        <i class="bi bi-arrow-up-right-circle"></i>
+                        Contact Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer-pro">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+        <p class="mb-0"><strong>SK Solar Technology</strong> | Clean energy solutions for homes, businesses, and industry.</p>
+        <p class="mb-0 footer-note">Copyright &copy; 2026 SK Solar Technology</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>

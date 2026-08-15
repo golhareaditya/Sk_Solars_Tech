@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - SK Solar</title>
+    <link rel="icon" href="{% static 'images/sk-solar-logo.png' %}" type="image/png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Urbanist:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+        :root {
+            --page-bg: #eef6ff;
+            --primary: #0a8f6a;
+            --primary-dark: #12344d;
+            --accent: #ffb703;
+            --secondary: #ff7f50;
+            --sky: #59c3ff;
+            --text: #162536;
+            --muted: #5d6c7c;
+            --border: rgba(22, 37, 54, 0.08);
+            --shadow: 0 24px 60px rgba(35, 84, 122, 0.16);
+        }
+
+        body {
+            background:
+                radial-gradient(circle at top left, rgba(255, 183, 3, 0.2), transparent 24%),
+                radial-gradient(circle at top right, rgba(89, 195, 255, 0.18), transparent 28%),
+                linear-gradient(180deg, #f8fdff 0%, #eef7ef 30%, var(--page-bg) 64%, #ffffff 100%);
+            color: var(--text);
+            font-family: 'Manrope', sans-serif;
+        }
+
+        h1, h2, h3, h4, h5, h6,
+        .btn,
+        .section-eyebrow,
+        .contact-chip {
+            font-family: 'Urbanist', sans-serif;
+        }
+
+        .navbar {
+            background: rgba(7, 24, 28, 0.88) !important;
+            backdrop-filter: blur(14px);
+        }
+
+        .section-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 0.9rem;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(255, 183, 3, 0.24), rgba(255, 107, 107, 0.18));
+            color: #fff1bc;
+            font-size: 0.84rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .contact-hero {
+            position: relative;
+            padding: 8.5rem 0 5rem;
+            overflow: hidden;
+        }
+
+        .contact-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(120deg, rgba(10, 26, 34, 0.92), rgba(18, 52, 77, 0.82), rgba(10, 143, 106, 0.48)),
+                url("{% static 'images/solar4.jpg' %}") center/cover no-repeat;
+            z-index: -2;
+        }
+
+        .contact-hero::after {
+            content: "";
+            position: absolute;
+            inset: auto 0 0 0;
+            height: 150px;
+            background: linear-gradient(180deg, rgba(248, 252, 255, 0), rgba(248, 252, 255, 1));
+            z-index: -1;
+        }
+
+        .hero-shell {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 32px;
+            box-shadow: 0 32px 90px rgba(0, 0, 0, 0.26);
+            backdrop-filter: blur(12px);
+            overflow: hidden;
+        }
+
+        .hero-copy,
+        .hero-panel {
+            padding: 3rem;
+            height: 100%;
+        }
+
+        .hero-copy {
+            color: #fff;
+        }
+
+        .hero-title {
+            margin: 1.2rem 0 1rem;
+            font-size: clamp(2.8rem, 5vw, 5rem);
+            line-height: 1.02;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            max-width: 11ch;
+        }
+
+        .hero-title .accent {
+            color: #ffe29a;
+        }
+
+        .hero-copy p {
+            color: rgba(255, 255, 255, 0.82);
+            font-size: 1.04rem;
+            max-width: 40rem;
+            margin-bottom: 1.6rem;
+        }
+
+        .hero-points {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .hero-point {
+            padding: 1rem;
+            border-radius: 18px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.05));
+            border: 1px solid rgba(255, 255, 255, 0.14);
+        }
+
+        .hero-point strong {
+            display: block;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+        }
+
+        .hero-point span {
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 0.92rem;
+        }
+
+        .hero-panel {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(233, 249, 255, 0.93));
+            color: var(--text);
+        }
+
+        .panel-card,
+        .contact-info-card,
+        .form-shell,
+        .promise-card,
+        .map-shell,
+        .cta-shell {
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .panel-card {
+            background: linear-gradient(180deg, #ffffff, #fff8e4);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .panel-card h4 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 0.45rem;
+            color: var(--primary-dark);
+        }
+
+        .panel-card p,
+        .mini-list li,
+        .section-subtitle,
+        .contact-info-card p,
+        .promise-card p,
+        .footer-note,
+        .cta-shell p,
+        .form-note {
+            color: var(--muted);
+        }
+
+        .mini-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0 0;
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .mini-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+        }
+
+        .mini-list i,
+        .contact-icon,
+        .promise-icon {
+            color: var(--primary);
+        }
+
+        .section-block {
+            position: relative;
+            padding: 5rem 0;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            margin: 0.75rem 0 0.5rem;
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.05;
+            font-weight: 800;
+            color: var(--primary-dark);
+            max-width: 14ch;
+        }
+
+        .section-subtitle {
+            margin: 0;
+            max-width: 40rem;
+            font-size: 1rem;
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .contact-stack {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .contact-info-card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(242, 249, 255, 0.92));
+            padding: 1.5rem;
+        }
+
+        .contact-icon,
+        .promise-icon {
+            width: 58px;
+            height: 58px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(255, 183, 3, 0.18), rgba(89, 195, 255, 0.16), rgba(10, 143, 106, 0.14));
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info-card h4,
+        .promise-card h4 {
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 0.45rem;
+        }
+
+        .contact-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-bottom: 0.8rem;
+            padding: 0.42rem 0.78rem;
+            border-radius: 999px;
+            background: rgba(10, 143, 106, 0.08);
+            color: var(--primary);
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .contact-link {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .contact-link:hover {
+            color: var(--primary);
+        }
+
+        .social-handle {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            font-weight: 700;
+        }
+
+        .form-shell {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(239, 248, 244, 0.94));
+            padding: 2rem 2rem 3.1rem;
+        }
+
+        .form-shell .form-control {
+            border-radius: 14px;
+            border: 1px solid rgba(21, 32, 43, 0.12);
+            padding: 0.95rem 1rem;
+            box-shadow: none;
+        }
+
+        .form-shell textarea.form-control {
+            min-height: 300px;
+        }
+
+        .form-shell .form-control:focus {
+            border-color: rgba(13, 92, 59, 0.5);
+            box-shadow: 0 0 0 0.2rem rgba(13, 92, 59, 0.12);
+        }
+
+        .btn-solar {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            width: 100%;
+            padding: 0.95rem 1.3rem;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #ffd05a, #ff8f3c);
+            color: #1f2206;
+            border: none;
+            font-weight: 800;
+            box-shadow: 0 18px 35px rgba(255, 143, 60, 0.28);
+        }
+
+        .btn-solar:hover {
+            color: #1f2206;
+            transform: translateY(-1px);
+        }
+
+        .error-message {
+            display: none;
+            margin-top: 6px;
+            color: #dc3545;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .form-control.is-invalid {
+            border-color: #dc3545;
+            box-shadow: none;
+        }
+
+        .form-control.is-valid {
+            border-color: #198754;
+            box-shadow: none;
+        }
+
+        .promise-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .promise-card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 248, 230, 0.9));
+            padding: 1.6rem;
+            height: 100%;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .contact-info-card:hover,
+        .promise-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 28px 65px rgba(35, 84, 122, 0.22);
+        }
+
+        .map-shell {
+            overflow: hidden;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(242, 249, 255, 0.93));
+            padding: 1rem;
+        }
+
+        .map-shell iframe {
+            width: 100%;
+            height: 380px;
+            border: 0;
+            border-radius: 18px;
+        }
+
+        .cta-wrap {
+            padding-bottom: 5rem;
+        }
+
+        .cta-shell {
+            background:
+                linear-gradient(135deg, rgba(12, 31, 47, 0.96), rgba(18, 52, 77, 0.92), rgba(10, 143, 106, 0.86));
+            padding: 2.4rem;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .cta-shell::after {
+            content: "";
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 183, 3, 0.3), rgba(255, 183, 3, 0));
+        }
+
+        .btn-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.95rem 1.3rem;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #ffd05a, #ff8f3c);
+            color: #1f2206;
+            font-weight: 800;
+            text-decoration: none;
+            box-shadow: 0 18px 35px rgba(255, 143, 60, 0.28);
+        }
+
+        .footer-pro {
+            background: linear-gradient(135deg, #0c1f2f, #12344d);
+            color: rgba(255, 255, 255, 0.76);
+            padding: 1.5rem 0;
+        }
+
+        .footer-pro strong {
+            color: #fff;
+        }
+
+        @media (max-width: 991.98px) {
+            .hero-copy,
+            .hero-panel {
+                padding: 2rem;
+            }
+
+            .section-heading {
+                flex-direction: column;
+                align-items: start;
+            }
+
+            .contact-layout,
+            .promise-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .contact-hero {
+                padding-top: 7rem;
+            }
+
+            .hero-points {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-copy,
+            .hero-panel,
+            .contact-info-card,
+            .form-shell,
+            .promise-card,
+            .cta-shell {
+                padding: 1.5rem;
+            }
+
+            .map-shell iframe {
+                height: 300px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+<section class="contact-hero">
+    <div class="container">
+        <div class="hero-shell">
+            <div class="row g-0 align-items-stretch">
+                <div class="col-lg-7">
+                    <div class="hero-copy">
+                        <span class="section-eyebrow">
+                            <i class="bi bi-chat-dots-fill"></i>
+                            Contact SK Solar
+                        </span>
+                        <h1 class="hero-title">
+                            Let's plan your
+                            <span class="accent">solar project clearly.</span>
+                        </h1>
+                        <p>
+                            Reach out to SK Solar Technology for product guidance, installation planning, pricing support, and practical recommendations tailored to your property and energy goals.
+                        </p>
+
+                        <div class="hero-points">
+                            <div class="hero-point">
+                                <strong>Fast Response</strong>
+                                <span>Clear next steps for your residential or commercial requirement.</span>
+                            </div>
+                            <div class="hero-point">
+                                <strong>Expert Support</strong>
+                                <span>Guidance on products, sizing, installation, and maintenance.</span>
+                            </div>
+                            <div class="hero-point">
+                                <strong>Practical Advice</strong>
+                                <span>Recommendations based on budget, usage, and site conditions.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="hero-panel">
+                        <div class="panel-card">
+                            <span class="section-eyebrow text-dark bg-warning-subtle border-0">Why Contact Us</span>
+                            <h4>Professional support before you invest</h4>
+                            <p class="mb-0">We help you understand the right solar direction before installation starts, so decisions feel more informed and less confusing.</p>
+                        </div>
+
+                        <div class="panel-card mb-0">
+                            <h4>What we can help with</h4>
+                            <ul class="mini-list">
+                                <li><i class="bi bi-check2-circle"></i><span>Choosing the right solar brand and service option</span></li>
+                                <li><i class="bi bi-check2-circle"></i><span>Understanding estimated output, pricing, and fitment</span></li>
+                                <li><i class="bi bi-check2-circle"></i><span>Planning next steps for installation and maintenance support</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-block">
+    <div class="container">
+        <div class="section-heading">
+            <div>
+                <span class="section-eyebrow text-dark bg-warning-subtle border-0">Get In Touch</span>
+                <h2 class="section-title">Talk to our team in the way that feels easiest.</h2>
+            </div>
+            <p class="section-subtitle">This contact page now feels more structured and premium, while still keeping the form easy to use and the key contact details easy to find.</p>
+        </div>
+
+        <div class="contact-layout">
+            <div class="contact-stack">
+                <div class="contact-info-card">
+                    <div class="contact-icon"><i class="bi bi-geo-alt"></i></div>
+                    <span class="contact-chip"><i class="bi bi-pin-map"></i>Office Location</span>
+                    <h4>Address</h4>
+                    <p class="mb-0">Chhatrapati Sambhajinagar, formerly Aurangabad, Maharashtra, India</p>
+                </div>
+
+                <div class="contact-info-card">
+                    <div class="contact-icon"><i class="bi bi-telephone"></i></div>
+                    <span class="contact-chip"><i class="bi bi-headset"></i>Call Us</span>
+                    <h4>Phone</h4>
+                    <p class="mb-0"><a href="tel:+919876543210" class="contact-link">+91 9876543210</a></p>
+                </div>
+
+                <div class="contact-info-card">
+                    <div class="contact-icon"><i class="bi bi-envelope"></i></div>
+                    <span class="contact-chip"><i class="bi bi-send"></i>Email Support</span>
+                    <h4>Email</h4>
+                    <p class="mb-0"><a href="mailto:contact.sksolartech@gmail.com" class="contact-link">contact.sksolartech@gmail.com</a></p>
+                </div>
+
+                <div class="contact-info-card">
+                    <div class="contact-icon"><i class="bi bi-instagram"></i></div>
+                    <span class="contact-chip"><i class="bi bi-camera"></i>Instagram</span>
+                    <h4>Instagram</h4>
+                    <p class="mb-0">
+                        <a href="https://www.instagram.com/sk.solar.tech/" class="contact-link social-handle" target="_blank" rel="noopener noreferrer">
+                            <i class="bi bi-instagram"></i>
+                            <span>@sk.solar.tech</span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-shell">
+                <span class="section-eyebrow text-dark bg-warning-subtle border-0">Send Message</span>
+                <h3 class="mt-3 mb-2" style="font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 800; color: var(--primary-dark);">Tell us about your requirement.</h3>
+                <p class="form-note">Share your details and we will get back with practical guidance on solar products, system planning, and next steps.</p>
+
+                <form method="POST" id="contactForm" novalidate class="mt-4">
+                    {% csrf_token %}
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" placeholder="Full Name" name="name" id="name" required minlength="3" maxlength="50">
+                            <div class="error-message" id="nameError"></div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <input type="email" class="form-control" placeholder="Email Address" name="email" id="email" required>
+                            <div class="error-message" id="emailError"></div>
+                        </div>
+
+                        <div class="col-12">
+                            <input type="text" class="form-control" placeholder="Phone Number" name="phone" id="phone" inputmode="numeric" maxlength="15">
+                            <div class="error-message" id="phoneError"></div>
+                        </div>
+
+                        <div class="col-12">
+                            <textarea class="form-control" rows="5" placeholder="Your Message" name="message" id="message" required minlength="10" maxlength="500"></textarea>
+                            <div class="error-message" id="messageError"></div>
+                        </div>
+
+                        <div class="col-12">
+                            <button class="btn-solar" type="submit">
+                                <i class="bi bi-arrow-up-right-circle"></i>
+                                Send Message
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="promise-grid">
+            <div class="promise-card">
+                <div class="promise-icon"><i class="bi bi-lightning-charge"></i></div>
+                <h4>Quick Guidance</h4>
+                <p>We help you move from interest to clarity faster with direct and practical solar recommendations.</p>
+            </div>
+            <div class="promise-card">
+                <div class="promise-icon"><i class="bi bi-shield-check"></i></div>
+                <h4>Reliable Support</h4>
+                <p>Our team focuses on realistic advice, better product fit, and support that continues after the first conversation.</p>
+            </div>
+            <div class="promise-card">
+                <div class="promise-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                <h4>Smarter Planning</h4>
+                <p>Whether it is a home or business setup, we help align your solar decision with budget and long-term savings.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section-block pt-0">
+    <div class="container">
+        <div class="map-shell">
+           <iframe src="https://www.google.com/maps/d/embed?mid=1CKjF4whDlnTl2ZEKFD6R9MK6wDHIhSc&ehbc=2E312F" width="640" height="480"></iframe>
+        </div>
+    </div>
+</section>
+
+<section class="cta-wrap">
+    <div class="container">
+        <div class="cta-shell">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-8">
+                    <span class="section-eyebrow">
+                        <i class="bi bi-sun-fill"></i>
+                        Free Consultation
+                    </span>
+                    <h3 class="mt-3 mb-2" style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;">Ready to switch to smarter solar planning?</h3>
+                    <p>Connect with SK Solar Technology today and get guidance on the right products, system setup, and installation direction for your property.</p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <a href="tel:+919876543210" class="btn-cta">
+                        <i class="bi bi-telephone-fill"></i>
+                        Call Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer-pro">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+        <p class="mb-0"><strong>SK Solar Technology</strong> | Clean energy solutions for homes, businesses, and industry.</p>
+        <p class="mb-0 footer-note">Copyright &copy; 2026 SK Solar Technology</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+<script>
+const contactForm = document.getElementById('contactForm');
+
+const fields = {
+    name: {
+        input: document.getElementById('name'),
+        error: document.getElementById('nameError'),
+        validate(value) {
+            const trimmedValue = value.trim();
+            if (!trimmedValue) return 'Full name is required.';
+            if (trimmedValue.length < 3) return 'Full name must be at least 3 characters.';
+            if (!/^[A-Za-z\s]+$/.test(trimmedValue)) return 'Full name should contain only letters.';
+            return '';
+        }
+    },
+    email: {
+        input: document.getElementById('email'),
+        error: document.getElementById('emailError'),
+        validate(value) {
+            const trimmedValue = value.trim();
+            if (!trimmedValue) return 'Email address is required.';
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedValue)) return 'Enter a valid email address.';
+            return '';
+        }
+    },
+    phone: {
+        input: document.getElementById('phone'),
+        error: document.getElementById('phoneError'),
+        validate(value) {
+            const trimmedValue = value.trim();
+            if (!trimmedValue) return '';
+            if (!/^\d{10}$/.test(trimmedValue)) return 'Phone number must be exactly 10 digits.';
+            return '';
+        }
+    },
+    message: {
+        input: document.getElementById('message'),
+        error: document.getElementById('messageError'),
+        validate(value) {
+            const trimmedValue = value.trim();
+            if (!trimmedValue) return 'Message is required.';
+            if (trimmedValue.length < 10) return 'Message must be at least 10 characters.';
+            return '';
+        }
+    }
+};
+
+function toggleError(field, message) {
+    if (message) {
+        field.input.classList.add('is-invalid');
+        field.input.classList.remove('is-valid');
+        field.error.textContent = message;
+        field.error.style.display = 'block';
+        return false;
+    }
+
+    field.input.classList.remove('is-invalid');
+    if (field.input.value.trim()) {
+        field.input.classList.add('is-valid');
+    } else {
+        field.input.classList.remove('is-valid');
+    }
+    field.error.textContent = '';
+    field.error.style.display = 'none';
+    return true;
+}
+
+function validateField(fieldName) {
+    const field = fields[fieldName];
+    const message = field.validate(field.input.value);
+    return toggleError(field, message);
+}
+
+Object.keys(fields).forEach((fieldName) => {
+    const field = fields[fieldName];
+    field.input.addEventListener('input', () => validateField(fieldName));
+    field.input.addEventListener('blur', () => validateField(fieldName));
+});
+
+contactForm.addEventListener('submit', (event) => {
+    const isFormValid = Object.keys(fields).every((fieldName) => validateField(fieldName));
+
+    if (!isFormValid) {
+        event.preventDefault();
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <title>About SK Solar Technology</title>
+  <link rel="icon" href="{% static 'images/sk-solar-logo.png' %}" type="image/png">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Urbanist:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <style>
+    :root {
+      --page-bg: #eef6ff;
+      --primary: #0a8f6a;
+      --primary-dark: #12344d;
+      --accent: #ffb703;
+      --secondary: #ff7f50;
+      --sky: #59c3ff;
+      --text: #162536;
+      --muted: #5d6c7c;
+      --border: rgba(22, 37, 54, 0.08);
+      --shadow: 0 24px 60px rgba(35, 84, 122, 0.16);
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(255, 183, 3, 0.2), transparent 24%),
+        radial-gradient(circle at top right, rgba(89, 195, 255, 0.2), transparent 28%),
+        linear-gradient(180deg, #f8fdff 0%, #eef7ef 30%, var(--page-bg) 64%, #ffffff 100%);
+      color: var(--text);
+      font-family: 'Manrope', sans-serif;
+    }
+
+    h1, h2, h3, h4, h5, h6,
+    .btn,
+    .section-eyebrow,
+    .metric-value {
+      font-family: 'Urbanist', sans-serif;
+    }
+
+    .navbar {
+      background: rgba(7, 24, 28, 0.88) !important;
+      backdrop-filter: blur(14px);
+    }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(255, 183, 3, 0.24), rgba(255, 107, 107, 0.18));
+      color: #fff1bc;
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .about-hero {
+      position: relative;
+      padding: 8.5rem 0 5rem;
+      overflow: hidden;
+    }
+
+    .about-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(10, 26, 34, 0.9), rgba(18, 52, 77, 0.78), rgba(10, 143, 106, 0.52)),
+        url("{% static 'images/solar-bg.jpg' %}") center/cover no-repeat;
+      z-index: -2;
+    }
+
+    .about-hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 150px;
+      background: linear-gradient(180deg, rgba(248, 252, 255, 0), rgba(248, 252, 255, 1));
+      z-index: -1;
+    }
+
+    .hero-shell {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 32px;
+      box-shadow: 0 32px 90px rgba(0, 0, 0, 0.26);
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+    }
+
+    .hero-copy,
+    .hero-aside {
+      padding: 3rem;
+      height: 100%;
+    }
+
+    .hero-copy {
+      color: #fff;
+    }
+
+    .hero-title {
+      margin: 1.2rem 0 1rem;
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      line-height: 1.02;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      max-width: 12ch;
+    }
+
+    .hero-title .accent {
+      color: #ffe29a;
+    }
+
+    .hero-copy p {
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 1.04rem;
+      max-width: 42rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .hero-point {
+      padding: 1rem;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.05));
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .hero-point strong {
+      display: block;
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 0.2rem;
+    }
+
+    .hero-point span {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.92rem;
+    }
+
+    .hero-aside {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(233, 249, 255, 0.93));
+      color: var(--text);
+    }
+
+    .aside-card,
+    .glass-card,
+    .service-card,
+    .why-card,
+    .process-card,
+    .cta-shell {
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .aside-card {
+      background: linear-gradient(180deg, #ffffff, #fff8e4);
+      padding: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .aside-card h4 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      color: var(--primary-dark);
+    }
+
+    .aside-card p,
+    .mini-list li,
+    .section-subtitle,
+    .service-card p,
+    .process-text,
+    .why-card p,
+    .cta-shell p,
+    .footer-note {
+      color: var(--muted);
+    }
+
+    .mini-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .mini-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+    }
+
+    .mini-list i,
+    .service-icon,
+    .why-icon,
+    .process-icon {
+      color: var(--primary);
+    }
+
+    .section-block {
+      position: relative;
+      padding: 5rem 0;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      margin: 0.75rem 0 0.5rem;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05;
+      font-weight: 800;
+      color: var(--primary-dark);
+      max-width: 14ch;
+    }
+
+    .section-subtitle {
+      margin: 0;
+      max-width: 40rem;
+      font-size: 1rem;
+    }
+
+    .company-story {
+      padding-top: 2.5rem;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .story-visual {
+      position: relative;
+    }
+
+    .story-image {
+      width: 100%;
+      border-radius: 30px;
+      box-shadow: 0 26px 70px rgba(18, 52, 77, 0.2);
+      object-fit: cover;
+      min-height: 480px;
+    }
+
+    .experience-badge {
+      position: absolute;
+      right: 1.2rem;
+      bottom: 1.2rem;
+      padding: 1rem 1.2rem;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #ffd05a, #ff8f3c);
+      color: #1f2206;
+      box-shadow: 0 22px 45px rgba(255, 143, 60, 0.28);
+    }
+
+    .experience-badge strong {
+      display: block;
+      font-size: 1.7rem;
+      line-height: 1;
+      font-weight: 800;
+    }
+
+    .story-panel {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(242, 249, 255, 0.92));
+      padding: 2rem;
+      border-radius: 30px;
+      border: 1px solid rgba(22, 37, 54, 0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .story-panel p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .story-list {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0 0;
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .story-list li {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      color: var(--text);
+    }
+
+    .story-list i {
+      color: var(--secondary);
+      margin-top: 0.15rem;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .owner-spotlight {
+      padding-top: 0.5rem;
+    }
+
+    .owner-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 1.5rem;
+      align-items: stretch;
+      padding: 1.5rem;
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at top left, rgba(255, 183, 3, 0.18), transparent 30%),
+        linear-gradient(145deg, rgba(12, 31, 47, 0.98), rgba(18, 52, 77, 0.95), rgba(10, 143, 106, 0.88));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 28px 80px rgba(16, 46, 68, 0.22);
+      overflow: hidden;
+    }
+
+    .owner-visual {
+      position: relative;
+      min-height: 100%;
+    }
+
+    .owner-image {
+      width: 100%;
+      height: 100%;
+      min-height: 460px;
+      object-fit: cover;
+      border-radius: 26px;
+      box-shadow: 0 24px 55px rgba(0, 0, 0, 0.28);
+    }
+
+    .owner-badge {
+      position: absolute;
+      left: 1.2rem;
+      right: 1.2rem;
+      bottom: 1.2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      width: fit-content;
+      max-width: calc(100% - 2.4rem);
+      padding: 0.8rem 1rem;
+      border-radius: 18px;
+      background: rgba(255, 213, 47, 0.16);
+      color: #fff;
+      border: 1px solid rgba(241, 211, 43, 0.18);
+      backdrop-filter: blur(10px);
+    }
+
+    .owner-badge i {
+      font-size: 1.1rem;
+      color: #ffe29a;
+    }
+
+    .owner-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0.4rem 0.5rem 0.4rem 0;
+      color: #fff;
+    }
+
+    .owner-content .section-title,
+    .owner-content h3,
+    .owner-content h4 {
+      color: #fff;
+      max-width: 100%;
+    }
+
+    .owner-content .section-subtitle,
+    .owner-copy,
+    .owner-highlights li,
+    .owner-note {
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .owner-role {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      width: fit-content;
+      margin: 1rem 0 0.8rem;
+      padding: 0.48rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 0.84rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .owner-name {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.4rem;
+    }
+
+    .owner-copy {
+      font-size: 1rem;
+      line-height: 1.85;
+      margin-bottom: 0.85rem;
+    }
+
+    .owner-highlights {
+      list-style: none;
+      padding: 0;
+      margin: 1.2rem 0 0;
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .owner-highlights li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.95rem 1rem;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .owner-highlights i {
+      color: #ffd772;
+      margin-top: 0.15rem;
+    }
+
+    .owner-note {
+      margin-top: 1.2rem;
+      padding: 1rem 1.1rem;
+      border-left: 4px solid #ffd05a;
+      border-radius: 0 18px 18px 0;
+      background: rgba(255, 255, 255, 0.07);
+      font-size: 0.96rem;
+      line-height: 1.75;
+    }
+
+    .glass-card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(242, 248, 255, 0.92));
+      padding: 1.5rem;
+      height: 100%;
+    }
+
+    .metric-value {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    .service-showcase {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-showcase::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(140deg, rgba(18, 52, 77, 0.95), rgba(10, 143, 106, 0.9)),
+        radial-gradient(circle at top right, rgba(255, 183, 3, 0.2), transparent 30%);
+      z-index: -2;
+    }
+
+    .service-showcase::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(9, 32, 47, 0.22) 100%),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 140px);
+      z-index: -1;
+      opacity: 0.85;
+    }
+
+    .service-showcase .section-title,
+    .service-showcase .section-subtitle {
+      color: #fff;
+    }
+
+    .service-showcase .section-subtitle {
+      color: rgba(255, 255, 255, 0.76);
+    }
+
+    .service-card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(239, 248, 244, 0.94));
+      padding: 1.8rem;
+      height: 100%;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .service-card:hover,
+    .why-card:hover,
+    .glass-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 65px rgba(35, 84, 122, 0.22);
+    }
+
+    .service-icon,
+    .why-icon {
+      width: 62px;
+      height: 62px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(255, 183, 3, 0.18), rgba(89, 195, 255, 0.16), rgba(10, 143, 106, 0.14));
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .service-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.9rem;
+      padding: 0.42rem 0.78rem;
+      border-radius: 999px;
+      background: rgba(10, 143, 106, 0.08);
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .service-card h4,
+    .why-card h4,
+    .process-content h4 {
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    .service-card a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .service-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .service-list li {
+      display: flex;
+      gap: 0.6rem;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    .service-list i {
+      color: var(--secondary);
+    }
+
+    .process-layout {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .process-card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(243, 249, 255, 0.94));
+      padding: 1.6rem;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .process-card::before {
+      content: "";
+      display: block;
+      width: 64px;
+      height: 4px;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, var(--accent), var(--sky), var(--secondary));
+    }
+
+    .process-step {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #12344d, #0a8f6a);
+      color: #fff;
+      font-weight: 800;
+      font-family: 'Urbanist', sans-serif;
+    }
+
+    .process-icon {
+      width: 54px;
+      height: 54px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, rgba(255, 183, 3, 0.16), rgba(89, 195, 255, 0.16));
+      font-size: 1.25rem;
+    }
+
+    .process-text {
+      margin: 0;
+      line-height: 1.75;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .why-card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 248, 230, 0.9));
+      padding: 1.8rem;
+      height: 100%;
+      text-align: left;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .cta-wrap {
+      padding-bottom: 5rem;
+    }
+
+    .cta-shell {
+      background:
+        linear-gradient(135deg, rgba(12, 31, 47, 0.96), rgba(18, 52, 77, 0.92), rgba(10, 143, 106, 0.86));
+      padding: 2.4rem;
+      color: #fff;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .cta-shell::after {
+      content: "";
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 183, 3, 0.3), rgba(255, 183, 3, 0));
+    }
+
+    .cta-shell p {
+      color: rgba(255, 255, 255, 0.74);
+      max-width: 44rem;
+      margin-bottom: 0;
+    }
+
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.95rem 1.3rem;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #ffd05a, #ff8f3c);
+      color: #1f2206;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 18px 35px rgba(255, 143, 60, 0.28);
+    }
+
+    .footer-pro {
+      background: linear-gradient(135deg, #0c1f2f, #12344d);
+      color: rgba(255, 255, 255, 0.76);
+      padding: 1.5rem 0;
+    }
+
+    .footer-pro > p {
+      display: none;
+    }
+
+    .footer-pro strong {
+      color: #fff;
+    }
+
+    @media (max-width: 991.98px) {
+      .hero-copy,
+      .hero-aside {
+        padding: 2rem;
+      }
+
+      .section-heading {
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .story-grid,
+      .process-layout,
+      .owner-shell {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .metrics-grid,
+      .why-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .owner-content {
+        padding-right: 0;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      .about-hero {
+        padding-top: 7rem;
+      }
+
+      .hero-points,
+      .story-grid,
+      .metrics-grid,
+      .process-layout,
+      .why-grid,
+      .owner-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy,
+      .hero-aside,
+      .story-panel,
+      .service-card,
+      .why-card,
+      .process-card,
+      .cta-shell {
+        padding: 1.5rem;
+      }
+
+      .story-image {
+        min-height: 320px;
+      }
+
+      .owner-shell {
+        padding: 1rem;
+      }
+
+      .owner-image {
+        min-height: 320px;
+      }
+
+      .experience-badge {
+        position: static;
+        margin-top: 1rem;
+        display: inline-block;
+      }
+
+      .owner-badge {
+        position: static;
+        margin-top: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+<section class="about-hero">
+  <div class="container">
+    <div class="hero-shell">
+      <div class="row g-0 align-items-stretch">
+        <div class="col-lg-7">
+          <div class="hero-copy">
+            <span class="section-eyebrow">
+              <i class="bi bi-sun-fill"></i>
+              About SK Solar
+            </span>
+            <h1 class="hero-title">
+              Building cleaner energy systems with
+              <span class="accent">practical expertise.</span>
+            </h1>
+            <p>
+              SK Solar Technology helps homes, businesses, and industrial facilities shift to dependable solar power with thoughtful planning, quality products, and support that continues after installation.
+            </p>
+
+            <div class="hero-points">
+              <div class="hero-point">
+                <strong>12+ Years</strong>
+                <span>Hands-on experience across varied project sizes.</span>
+              </div>
+              <div class="hero-point">
+                <strong>End-to-End</strong>
+                <span>From survey and design to execution and upkeep.</span>
+              </div>
+              <div class="hero-point">
+                <strong>Client First</strong>
+                <span>Clear communication, practical recommendations, and long-term support.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="hero-aside">
+            <div class="aside-card">
+              <span class="section-eyebrow text-dark bg-warning-subtle border-0">Our Promise</span>
+              <h4>Reliable solar guidance for confident investment decisions</h4>
+              <p class="mb-0">We focus on honest planning, efficient hardware selection, and dependable execution so every client gets a system that makes sense financially and technically.</p>
+            </div>
+
+            <div class="aside-card mb-0">
+              <h4>What sets our team apart</h4>
+              <ul class="mini-list">
+                <li><i class="bi bi-check2-circle"></i><span>Professional support for residential, commercial, and industrial requirements</span></li>
+                <li><i class="bi bi-check2-circle"></i><span>Performance-focused system design based on site conditions and consumption needs</span></li>
+                <li><i class="bi bi-check2-circle"></i><span>Practical post-installation maintenance and issue resolution support</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-block company-story">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <span class="section-eyebrow text-dark bg-warning-subtle border-0">Who We Are</span>
+        <h2 class="section-title">A solar company built around trust, planning, and execution quality.</h2>
+      </div>
+      <p class="section-subtitle">We combine strong product knowledge with project discipline so clients get systems that are easier to understand, simpler to maintain, and better aligned with long-term savings.</p>
+    </div>
+
+    <div class="story-grid">
+      <div class="story-visual">
+        <img src="{% static 'images/about2.jpg' %}" alt="SK Solar Technology team and solar installation" class="story-image">
+        <div class="experience-badge">
+          <strong>12+</strong>
+          Years of solar experience
+        </div>
+      </div>
+
+      <div class="story-panel">
+        <h3 class="mb-3" style="font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 800; color: var(--primary-dark);">About SK Solar Technology</h3>
+        <p>SK Solar Technology is a trusted solar energy company delivering installation and support solutions for residential rooftops, commercial properties, and industrial facilities.</p>
+        <p>Our engineers and project team work closely with clients to design systems that reduce electricity costs, improve energy independence, and support a cleaner future without unnecessary complexity.</p>
+
+        <ul class="story-list">
+          <li><i class="bi bi-check2"></i><span>High-efficiency solar panels from recognized manufacturers</span></li>
+          <li><i class="bi bi-check2"></i><span>Experienced installation teams with clear process management</span></li>
+          <li><i class="bi bi-check2"></i><span>Affordable solution planning without compromising durability</span></li>
+          <li><i class="bi bi-check2"></i><span>Long-term maintenance and system support after commissioning</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="glass-card">
+        <span class="metric-value">200+</span>
+        <p class="mb-0">Projects completed with structured delivery and dependable output.</p>
+      </div>
+      <div class="glass-card">
+        <span class="metric-value">600+</span>
+        <p class="mb-0">Customers served across residential, commercial, and industrial categories.</p>
+      </div>
+      <div class="glass-card">
+        <span class="metric-value">8 MW</span>
+        <p class="mb-0">Installed solar capacity supporting lower electricity dependence.</p>
+      </div>
+      <div class="glass-card">
+        <span class="metric-value">12+ Years</span>
+        <p class="mb-0">Practical experience in planning, installation, and maintenance support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-block owner-spotlight pt-0">
+  <div class="container">
+    <div class="owner-shell">
+      <div class="owner-visual">
+        <img src="{% static 'images/about1.jpg' %}" alt="Company owner of SK Solar Technology" class="owner-image">
+        <div class="owner-badge">
+          <i class="bi bi-award-fill"></i>
+          <span>Leadership focused on trust, quality, and long-term client value</span>
+        </div>
+      </div>
+
+      <div class="owner-content">
+        <span class="section-eyebrow">
+          <i class="bi bi-person-badge-fill"></i>
+          Company Owner
+        </span>
+        <span class="owner-role">
+          <i class="bi bi-stars"></i>
+          Founder &amp; Managing Director
+        </span>
+        <h2 class="owner-name"> Sagar Mali</h2>
+        <p class="owner-copy">
+          The leadership behind SK Solar Technology is driven by a simple goal: make solar adoption easier, more reliable, and more valuable for every customer. From the first consultation to post-installation support, every project is guided with practical advice and a strong commitment to quality execution.
+        </p>
+        <p class="owner-copy">
+          With a hands-on approach to planning, customer support, and project delivery, the company owner helps ensure that each installation reflects the brand's promise of honest communication, durable systems, and long-term energy savings.
+        </p>
+
+        <ul class="owner-highlights">
+          <li><i class="bi bi-check2-circle"></i><span>Personal attention to project planning and customer requirements</span></li>
+          <li><i class="bi bi-check2-circle"></i><span>Focused on dependable products, clean installation, and strong after-sales support</span></li>
+          <li><i class="bi bi-check2-circle"></i><span>Committed to building trust with practical guidance instead of confusing technical sales talk</span></li>
+        </ul>
+
+        <div class="owner-note">
+          You can easily replace this owner name and description with the exact personal details later, while keeping the same responsive design and visual layout.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-block service-showcase">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <span class="section-eyebrow">Our Services</span>
+        <h2 class="section-title">Solar solutions structured around use case, scale, and savings goals.</h2>
+      </div>
+      <p class="section-subtitle">Each service is presented with more clarity so visitors can quickly understand where they fit and why the offering feels credible.</p>
+    </div>
+
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6">
+          <div class="service-card">
+            <div class="service-icon"><i class="bi bi-house-door"></i></div>
+            <span class="service-tag"><i class="bi bi-sun"></i>For Homes</span>
+            <h4><a href="{% url 'residential' %}">Residential Solar</a></h4>
+            <p>Rooftop solar systems designed to reduce household electricity bills with clean execution and long-term value.</p>
+          <ul class="service-list">
+            <li><i class="bi bi-check2"></i><span>Custom sizing based on family usage and available roof space</span></li>
+            <li><i class="bi bi-check2"></i><span>Guidance on output, savings, and future maintenance needs</span></li>
+          </ul>
+        </div>
+      </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="service-card">
+            <div class="service-icon"><i class="bi bi-building"></i></div>
+            <span class="service-tag"><i class="bi bi-briefcase"></i>For Business</span>
+            <h4><a href="{% url 'commercial' %}">Commercial Solar</a></h4>
+            <p>Business-ready systems focused on lowering operational costs and improving energy planning for offices and institutions.</p>
+          <ul class="service-list">
+            <li><i class="bi bi-check2"></i><span>ROI-conscious deployment planning for commercial properties</span></li>
+            <li><i class="bi bi-check2"></i><span>Scalable infrastructure for evolving power requirements</span></li>
+          </ul>
+        </div>
+      </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="service-card">
+            <div class="service-icon"><i class="bi bi-gear-wide-connected"></i></div>
+            <span class="service-tag"><i class="bi bi-lightning-charge"></i>For Industry</span>
+            <h4><a href="{% url 'industrial' %}">Industrial Solar</a></h4>
+            <p>High-capacity solar solutions for factories and production environments where energy demand and reliability both matter.</p>
+            <ul class="service-list">
+              <li><i class="bi bi-check2"></i><span>Custom engineering for larger loads and demanding facilities</span></li>
+              <li><i class="bi bi-check2"></i><span>Better stability for long-duration operational usage</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="service-card">
+            <div class="service-icon"><i class="bi bi-cash-coin"></i></div>
+            <span class="service-tag"><i class="bi bi-file-earmark-check"></i>For Savings</span>
+            <h4><a href="{% url 'contact' %}">Solar Subsidy Assistance</a></h4>
+            <p>Support for subsidy-related guidance so customers can better understand eligibility, documents, and next steps before installation.</p>
+            <ul class="service-list">
+              <li><i class="bi bi-check2"></i><span>Guidance on documentation and process clarity for eligible projects</span></li>
+              <li><i class="bi bi-check2"></i><span>Helps customers plan solar investment with better cost visibility</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section class="section-block">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <span class="section-eyebrow text-dark bg-warning-subtle border-0">Installation Process</span>
+        <h2 class="section-title">A clear workflow that keeps every project practical and well-managed.</h2>
+      </div>
+      <p class="section-subtitle">From the first survey to final activation, our process is designed to reduce confusion, maintain quality, and move projects forward with confidence.</p>
+    </div>
+
+    <div class="process-layout">
+      <div class="process-card">
+        <span class="process-step">1</span>
+        <div class="process-icon"><i class="bi bi-geo-alt"></i></div>
+        <div class="process-content">
+          <h4>Site Inspection</h4>
+          <p class="process-text">We study roof area, shading, energy usage, and technical feasibility before finalizing the solar approach.</p>
+        </div>
+      </div>
+
+      <div class="process-card">
+        <span class="process-step">2</span>
+        <div class="process-icon"><i class="bi bi-pencil-square"></i></div>
+        <div class="process-content">
+          <h4>System Design</h4>
+          <p class="process-text">Panel layout, inverter selection, structure planning, and expected performance are mapped with care.</p>
+        </div>
+      </div>
+
+      <div class="process-card">
+        <span class="process-step">3</span>
+        <div class="process-icon"><i class="bi bi-tools"></i></div>
+        <div class="process-content">
+          <h4>Installation</h4>
+          <p class="process-text">Our team installs panels, structures, wiring, and equipment with attention to safety and execution quality.</p>
+        </div>
+      </div>
+
+      <div class="process-card">
+        <span class="process-step">4</span>
+        <div class="process-icon"><i class="bi bi-lightning"></i></div>
+        <div class="process-content">
+          <h4>Activation</h4>
+          <p class="process-text">After testing and final checks, the system is activated so it can begin delivering clean, usable power.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-block pt-0">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <span class="section-eyebrow text-dark bg-warning-subtle border-0">Why Choose Us</span>
+        <h2 class="section-title">Why clients trust SK Solar for long-term energy decisions.</h2>
+      </div>
+      <p class="section-subtitle">The focus is not just on selling panels, but on creating confidence through product quality, engineering judgment, and support that stays useful after the install.</p>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon"><i class="bi bi-grid-3x3-gap"></i></div>
+        <h4>High Quality Panels</h4>
+        <p>We prioritize recognized products with dependable output, stronger efficiency, and better long-term confidence.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-icon"><i class="bi bi-person-workspace"></i></div>
+        <h4>Experienced Engineers</h4>
+        <p>Our team brings practical field knowledge and project planning discipline to every installation journey.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-icon"><i class="bi bi-cash-coin"></i></div>
+        <h4>Affordable Solutions</h4>
+        <p>We help clients balance budget, output, and durability so the investment feels sensible from day one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-wrap">
+  <div class="container">
+    <div class="cta-shell">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-8">
+          <span class="section-eyebrow">
+            <i class="bi bi-chat-dots-fill"></i>
+            Free Consultation
+          </span>
+          <h3 class="mt-3 mb-2" style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;">Start saving with a solar plan that fits your property.</h3>
+          <p>Talk to SK Solar Technology for clear recommendations on system size, suitable products, installation planning, and next steps.</p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <a href="{% url 'contact' %}" class="btn-cta">
+            <i class="bi bi-arrow-up-right-circle"></i>
+            Get Free Consultation
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer-pro">
+<p>© 2026 SK Solar Technology | All Rights Reserved</p>
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+    <p class="mb-0"><strong>SK Solar Technology</strong> | Clean energy solutions for homes, businesses, and industry.</p>
+    <p class="mb-0 footer-note">Copyright &copy; 2026 SK Solar Technology</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>

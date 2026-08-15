@@ -1,0 +1,496 @@
+{% load static %}
+
+<style>
+  .sk-navbar {
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(245, 250, 255, 0.88), rgba(239, 248, 244, 0.9)) !important;
+    border-bottom: 1px solid rgba(18, 52, 77, 0.08);
+    box-shadow: 0 18px 45px rgba(31, 61, 90, 0.08);
+    backdrop-filter: blur(16px);
+  }
+
+  .sk-navbar .navbar-brand img {
+    height: 52px;
+    filter: drop-shadow(0 10px 22px rgba(18, 52, 77, 0.12));
+  }
+
+  .sk-navbar .navbar-nav {
+    align-items: center;
+    gap: 0.2rem;
+  }
+
+  .sk-navbar .nav-link {
+    color: #17324a !important;
+    font-weight: 700;
+    padding: 0.72rem 1.05rem !important;
+    border-radius: 999px;
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .sk-navbar .nav-link:hover,
+  .sk-navbar .nav-link:focus,
+  .sk-navbar .nav-link.show {
+    color: #0a8f6a !important;
+    background: linear-gradient(135deg, rgba(10, 143, 106, 0.1), rgba(89, 195, 255, 0.1));
+    box-shadow: inset 0 0 0 1px rgba(10, 143, 106, 0.08);
+    transform: translateY(-1px);
+  }
+
+  .sk-navbar .sk-language-item {
+    margin-left: 0.45rem;
+    position: relative;
+  }
+
+  .sk-navbar .sk-language-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    border: none;
+    border-radius: 999px;
+    padding: 0.72rem 1rem;
+    background: linear-gradient(135deg, #0a8f6a, #1aa2a0);
+    color: #fff;
+    font-weight: 700;
+    line-height: 1;
+    box-shadow: 0 14px 28px rgba(10, 143, 106, 0.2);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+  }
+
+  .sk-navbar .sk-language-btn:hover,
+  .sk-navbar .sk-language-btn:focus {
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 18px 32px rgba(10, 143, 106, 0.24);
+    opacity: 0.96;
+  }
+
+  .sk-navbar .sk-language-btn i {
+    font-size: 1rem;
+  }
+
+  .sk-navbar .sk-language-btn .bi-chevron-down {
+    font-size: 0.8rem;
+    transition: transform 0.25s ease;
+  }
+
+  .sk-navbar .sk-language-item.is-open .sk-language-btn .bi-chevron-down {
+    transform: rotate(180deg);
+  }
+
+  .sk-navbar .sk-language-menu {
+    position: absolute;
+    top: calc(100% + 0.65rem);
+    right: 0;
+    min-width: 190px;
+    margin: 0;
+    padding: 0.5rem;
+    list-style: none;
+    border: 1px solid rgba(18, 52, 77, 0.08);
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 250, 255, 0.96));
+    box-shadow: 0 22px 48px rgba(31, 61, 90, 0.14);
+    backdrop-filter: blur(14px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+    z-index: 1100;
+  }
+
+  .sk-navbar .sk-language-item.is-open .sk-language-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .sk-navbar .sk-language-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 0.72rem 0.95rem;
+    background: transparent;
+    color: #17324a;
+    font-weight: 600;
+    text-align: left;
+    transition: background-color 0.22s ease, color 0.22s ease, transform 0.22s ease;
+  }
+
+  .sk-navbar .sk-language-option:hover,
+  .sk-navbar .sk-language-option:focus {
+    color: #0a8f6a;
+    background: linear-gradient(135deg, rgba(10, 143, 106, 0.1), rgba(255, 183, 3, 0.12));
+    transform: translateX(3px);
+  }
+
+  .sk-navbar .sk-language-option.is-active {
+    color: #0a8f6a;
+    background: linear-gradient(135deg, rgba(10, 143, 106, 0.12), rgba(89, 195, 255, 0.12));
+  }
+
+  .sk-navbar .sk-language-option-check {
+    opacity: 0;
+    font-size: 0.9rem;
+    transition: opacity 0.2s ease;
+  }
+
+  .sk-navbar .sk-language-option.is-active .sk-language-option-check {
+    opacity: 1;
+  }
+
+  .skiptranslate,
+  .goog-te-banner-frame,
+  .goog-logo-link,
+  .goog-te-gadget span {
+    display: none !important;
+  }
+
+  body {
+    top: 0 !important;
+  }
+
+  #google_translate_element {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .sk-navbar .navbar-toggler {
+    border: none;
+    padding: 0.55rem 0.7rem;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(10, 143, 106, 0.1), rgba(89, 195, 255, 0.14));
+    box-shadow: inset 0 0 0 1px rgba(18, 52, 77, 0.08);
+  }
+
+  .sk-navbar .navbar-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(10, 143, 106, 0.12);
+  }
+
+  .sk-navbar .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2818,52,77,0.88%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2.2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
+
+  .sk-navbar .dropdown-menu {
+    border: 1px solid rgba(18, 52, 77, 0.08);
+    border-radius: 18px;
+    padding: 0.7rem;
+    margin-top: 0.8rem;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(244, 250, 255, 0.96));
+    box-shadow: 0 22px 48px rgba(31, 61, 90, 0.14);
+    backdrop-filter: blur(14px);
+  }
+
+  .sk-navbar .dropdown-item {
+    color: #17324a;
+    font-weight: 600;
+    border-radius: 12px;
+    padding: 0.72rem 0.95rem;
+    transition: background-color 0.22s ease, color 0.22s ease, transform 0.22s ease;
+  }
+
+  .sk-navbar .dropdown-item:hover,
+  .sk-navbar .dropdown-item:focus {
+    color: #0a8f6a;
+    background: linear-gradient(135deg, rgba(10, 143, 106, 0.1), rgba(255, 183, 3, 0.12));
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 991.98px) {
+    .sk-navbar .navbar-collapse {
+      margin-top: 0.85rem;
+      padding: 1rem;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(244, 250, 255, 0.95));
+      box-shadow: 0 18px 40px rgba(31, 61, 90, 0.12);
+      border: 1px solid rgba(18, 52, 77, 0.06);
+    }
+
+    .sk-navbar .navbar-nav {
+      align-items: stretch;
+    }
+
+    .sk-navbar .sk-language-item {
+      margin-left: 0;
+    }
+
+    .sk-navbar .sk-language-btn {
+      width: 100%;
+      justify-content: center;
+      margin-top: 0.3rem;
+    }
+
+    .sk-navbar .sk-language-menu {
+      position: static;
+      min-width: 100%;
+      margin-top: 0.5rem;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .sk-navbar .sk-language-item:not(.is-open) .sk-language-menu {
+      display: none;
+    }
+
+    .sk-navbar .dropdown-menu {
+      margin-top: 0.5rem;
+      box-shadow: none;
+      background: rgba(247, 251, 255, 0.96);
+    }
+  }
+
+  .floating-whatsapp {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 62px;
+    height: 62px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 0 18px 35px rgba(18, 140, 126, 0.32);
+    z-index: 1080;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .floating-whatsapp:hover {
+    color: #fff;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 22px 42px rgba(18, 140, 126, 0.4);
+  }
+
+  .floating-whatsapp i {
+    font-size: 1.8rem;
+    line-height: 1;
+  }
+
+  @media (max-width: 767.98px) {
+    .floating-whatsapp {
+      right: 16px;
+      bottom: 18px;
+      width: 58px;
+      height: 58px;
+    }
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light fixed-top sk-navbar">
+  <div class="container">
+
+    <a class="navbar-brand" href="{% url 'home' %}">
+      <img src="{% static 'images/sk-solar-logo.png' %}" 
+           alt="SK Solar Logo"
+           class="me-2">
+    </a>
+
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="menu">
+
+      <ul class="navbar-nav ms-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home' %}">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'about' %}">About</a>
+        </li>
+
+        <!-- PRODUCTS -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+            Products 
+          </a>
+
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'tata' %}">Tata Power Solar</a></li>
+            <li><a class="dropdown-item" href="{% url 'waaree' %}">Waaree Solar</a></li>
+            <li><a class="dropdown-item" href="{% url 'adani' %}">Adani Solar</a></li>
+            <li><a class="dropdown-item" href="{% url 'premier' %}">Premier solar</a></li>
+            <li><a class="dropdown-item" href="{% url 'utl' %}">UTL Solar</a></li>
+          </ul>
+        </li>
+
+        <!-- SERVICES -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+            Services 
+          </a>
+
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'residential' %}">Residential Solar</a></li>
+            <li><a class="dropdown-item" href="{% url 'commercial' %}">Commercial Solar</a></li>
+            <li><a class="dropdown-item" href="{% url 'solar_maintenance' %}">Solar Maintenance</a></li>
+            <li><a class="dropdown-item" href="{% url 'industrial' %}">Industrial Solar</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item"> 
+          <a class="nav-link" href="{% url 'gallery' %}">Gallery</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'projects' %}">Projects</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+        </li>
+
+        <li class="nav-item sk-language-item">
+          <button
+            class="sk-language-btn"
+            type="button"
+            aria-label="Select language"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="bi bi-translate"></i>
+            <span class="sk-language-label">English</span>
+            <i class="bi bi-chevron-down"></i>
+          </button>
+          <ul class="sk-language-menu" aria-label="Language options">
+            <li>
+              <button class="sk-language-option is-active" type="button" data-lang="en" data-label="English">
+                <span>English</span>
+                <i class="bi bi-check2 sk-language-option-check"></i>
+              </button>
+            </li>
+            <li>
+              <button class="sk-language-option" type="button" data-lang="hi" data-label="Hindi">
+                <span>Hindi</span>
+                <i class="bi bi-check2 sk-language-option-check"></i>
+              </button>
+            </li>
+            <li>
+              <button class="sk-language-option" type="button" data-lang="mr" data-label="Marathi">
+                <span>Marathi</span>
+                <i class="bi bi-check2 sk-language-option-check"></i>
+              </button>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+<a
+  href="https://wa.me/919730895903?text=Hello%20%F0%9F%91%8B%0AWelcome%20to%20SK%20Solar%20Technology%20Pvt.%20Ltd.%20%E2%98%80%EF%B8%8F%0A%0AThank%20you%20for%20reaching%20out%20to%20us.%20We%20have%20received%20your%20message%20and%20our%20team%20will%20respond%20to%20you%20as%20soon%20as%20possible.%0A%0AWe%20look%20forward%20to%20assisting%20you%20with%20your%20solar%20requirements.%0AThank%20you%21"
+  class="floating-whatsapp"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Chat on WhatsApp"
+  title="Chat on WhatsApp"
+>
+  <i class="bi bi-whatsapp"></i>
+</a>
+
+<div id="google_translate_element" aria-hidden="true"></div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const languageItem = document.querySelector('.sk-language-item');
+
+    if (!languageItem) {
+      return;
+    }
+
+    const languageButton = languageItem.querySelector('.sk-language-btn');
+    const languageLabel = languageItem.querySelector('.sk-language-label');
+    const languageOptions = languageItem.querySelectorAll('.sk-language-option');
+    const defaultSourceLanguage = 'en';
+
+    const setMenuState = (isOpen) => {
+      languageItem.classList.toggle('is-open', isOpen);
+      languageButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    };
+
+    const setLanguageCookie = (lang) => {
+      const cookieValue = '/' + defaultSourceLanguage + '/' + lang;
+      document.cookie = 'googtrans=' + cookieValue + '; path=/';
+      document.cookie = 'googtrans=' + cookieValue + '; path=/; domain=' + window.location.hostname;
+    };
+
+    const getSavedLanguage = () => {
+      const match = document.cookie.match(/(?:^|;)\s*googtrans=\/[^/]+\/([^;]+)/);
+      return match ? match[1] : defaultSourceLanguage;
+    };
+
+    const updateActiveLanguage = (lang) => {
+      let activeLabel = 'English';
+
+      languageOptions.forEach(function (option) {
+        const isActive = option.dataset.lang === lang;
+        option.classList.toggle('is-active', isActive);
+
+        if (isActive) {
+          activeLabel = option.dataset.label || activeLabel;
+        }
+      });
+
+      languageLabel.textContent = activeLabel;
+    };
+
+    const applyLanguage = (lang) => {
+      updateActiveLanguage(lang);
+      setLanguageCookie(lang);
+      window.location.reload();
+    };
+
+    languageButton.addEventListener('click', function (event) {
+      event.stopPropagation();
+      setMenuState(!languageItem.classList.contains('is-open'));
+    });
+
+    languageOptions.forEach(function (option) {
+      option.addEventListener('click', function () {
+        const selectedLanguage = option.dataset.lang || defaultSourceLanguage;
+        setMenuState(false);
+        applyLanguage(selectedLanguage);
+      });
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!languageItem.contains(event.target)) {
+        setMenuState(false);
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        setMenuState(false);
+      }
+    });
+
+    updateActiveLanguage(getSavedLanguage());
+  });
+</script>
+<script>
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      {
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi,mr',
+        autoDisplay: false
+      },
+      'google_translate_element'
+    );
+  }
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
