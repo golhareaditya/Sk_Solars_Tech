@@ -50,7 +50,7 @@ ALLOWED_HOSTS = [
 ]
 
 if ".onrender.com" not in ALLOWED_HOSTS:
-    ALLOWED_HOSTS.append(".onrender.com")
+    ALLOWED_HOSTS.append("sk-solar-tech.onrender.com")
 
 
 INSTALLED_APPS = [
@@ -157,7 +157,7 @@ if not DEBUG:
         origin.strip()
         for origin in os.environ.get(
             "CSRF_TRUSTED_ORIGINS",
-            "https://*.onrender.com",
+            "https://sk-solar-tech.onrender.com",
         ).split(",")
         if origin.strip()
     ]
